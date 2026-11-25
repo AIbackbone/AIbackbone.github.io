@@ -1,0 +1,2790 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Juan Manuel Díaz | Machine Learning &amp; MLOps Engineer — Production AI Portfolio</title>
+  <meta name="description" content="Portafolio profesional de Juan Manuel Díaz — Machine Learning & MLOps Engineer especializado en Visión por Computador, Backend Python y sistemas de IA listos para producción." />
+
+  <!-- Google Fonts: Space Grotesk (Headings), Inter (Body), JetBrains Mono (Code & Architecture) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Tailwind Design Tokens Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              950: '#0B1120',
+              900: '#0F172A',
+              850: '#131C31',
+              800: '#1E293B',
+            },
+            cyanx: '#06B6D4',
+            emeraldx: '#10B981',
+            violetx: '#8B5CF6',
+          },
+          fontFamily: {
+            heading: ['"Space Grotesk"', 'Inter', 'sans-serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          boxShadow: {
+            glowCyan: '0 0 28px -6px rgba(6, 182, 212, 0.35)',
+            glowEmerald: '0 0 28px -6px rgba(16, 185, 129, 0.30)',
+            glowViolet: '0 0 28px -6px rgba(139, 92, 246, 0.30)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Custom Styles: Glassmorphism, Animations, Scrollbars & Executive Print Mode -->
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+
+    body {
+      background-color: #0B1120;
+      color: #F8FAFC;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Subtle Tech Grid Background */
+    .bg-tech-grid {
+      background-image:
+        linear-gradient(to right, rgba(30, 41, 59, 0.35) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(30, 41, 59, 0.35) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+
+    /* Glassmorphism Cards */
+    .glass-card {
+      background: rgba(19, 28, 49, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(30, 41, 59, 0.95);
+    }
+
+    .glass-card-hover {
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .glass-card-hover:hover {
+      transform: translateY(-4px);
+      border-color: rgba(6, 182, 212, 0.55);
+      box-shadow: 0 12px 32px -12px rgba(6, 182, 212, 0.28);
+    }
+
+    /* Animated SVG Data Flow Dashes */
+    @keyframes flowDash {
+      to {
+        stroke-dashoffset: -28;
+      }
+    }
+
+    .svg-flow-line {
+      stroke-dasharray: 6 8;
+      animation: flowDash 1.6s linear infinite;
+    }
+
+    @keyframes pulseNode {
+      0%, 100% {
+        opacity: 0.45;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.95;
+        transform: scale(1.06);
+      }
+    }
+
+    .svg-pulse-ring {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: pulseNode 2.6s ease-in-out infinite;
+    }
+
+    @keyframes scanLine {
+      0%, 100% {
+        transform: translateY(0px);
+        opacity: 0.3;
+      }
+      50% {
+        transform: translateY(72px);
+        opacity: 0.95;
+      }
+    }
+
+    .svg-scan-beam {
+      animation: scanLine 3.4s ease-in-out infinite;
+    }
+
+    /* Interactive Hero SVG Node Hover & Active States */
+    .pipeline-node {
+      cursor: pointer;
+      transition: filter 0.2s ease, opacity 0.2s ease;
+    }
+
+    .pipeline-node:hover {
+      filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.6));
+    }
+
+    .pipeline-node.active-node rect.node-box {
+      stroke: #06B6D4;
+      stroke-width: 2.2;
+      fill: rgba(6, 182, 212, 0.16);
+    }
+
+    /* Custom Thin Dark Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0B1120;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1E293B;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+
+    /* Toast Entrance Animation */
+    @keyframes toastIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    .toast-animate {
+      animation: toastIn 0.25s ease forwards;
+    }
+
+    /* =====================================================================
+       EXECUTIVE LIGHT-MODE PRINTABLE LAYOUT (@media print)
+       Transforms the dark executive UI into a crisp white PDF dossier
+       ===================================================================== */
+    @media print {
+      @page {
+        size: A4;
+        margin: 12mm;
+      }
+
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      body {
+        background: #FFFFFF !important;
+        color: #0F172A !important;
+        font-size: 11px !important;
+      }
+
+      .no-print,
+      nav,
+      #project-modal,
+      #toast-container,
+      #filter-bar,
+      .interactive-hint,
+      #brief-builder-panel {
+        display: none !important;
+      }
+
+      .print-only {
+        display: block !important;
+      }
+
+      .bg-tech-grid {
+        background-image: none !important;
+      }
+
+      .glass-card,
+      .print-card {
+        background: #FFFFFF !important;
+        border: 1px solid #CBD5E1 !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        color: #0F172A !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+      }
+
+      h1, h2, h3, h4 {
+        color: #0F172A !important;
+      }
+
+      p, span, li, div {
+        color: #334155 !important;
+      }
+
+      .print-accent {
+        color: #0E7490 !important;
+        font-weight: 600 !important;
+      }
+
+      .print-badge {
+        background: #F1F5F9 !important;
+        border: 1px solid #CBD5E1 !important;
+        color: #0F172A !important;
+      }
+
+      section {
+        padding-top: 16px !important;
+        padding-bottom: 16px !important;
+        break-inside: auto !important;
+      }
+
+      svg text {
+        fill: #0F172A !important;
+      }
+
+      .print-dark-svg {
+        background: #0F172A !important;
+        border-radius: 10px !important;
+      }
+
+      .print-dark-svg text {
+        fill: #F8FAFC !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-navy-950 text-slate-50 antialiased selection:bg-cyanx/30 selection:text-cyan-200">
+
+  <!-- Ambient Top Gradient Glow -->
+  <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden no-print" aria-hidden="true">
+    <div class="absolute -top-40 left-1/4 h-[420px] w-[420px] rounded-full bg-cyanx/10 blur-[120px]"></div>
+    <div class="absolute top-1/3 -right-24 h-[380px] w-[380px] rounded-full bg-violetx/10 blur-[120px]"></div>
+    <div class="absolute bottom-0 left-1/3 h-[340px] w-[340px] rounded-full bg-emeraldx/10 blur-[120px]"></div>
+  </div>
+
+  <!-- ===================================================================
+       1. STICKY TOP NAVBAR
+       =================================================================== -->
+  <header class="sticky top-0 z-40 border-b border-slate-800/80 bg-navy-950/85 backdrop-blur-xl no-print">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
+      <!-- Brand Logo -->
+      <a href="#top" class="group flex items-center gap-2.5 focus:outline-none">
+        <span class="relative flex h-9 w-9 items-center justify-center rounded-xl border border-cyanx/40 bg-cyanx/10 font-mono text-sm font-bold text-cyanx shadow-glowCyan transition-transform group-hover:scale-105">
+          <i data-lucide="cpu" class="h-4 w-4"></i>
+        </span>
+        <div class="flex flex-col">
+          <span class="font-mono text-sm font-bold tracking-wider text-slate-100">
+            JMD <span class="text-cyanx">//</span> ML.OPS
+          </span>
+          <span class="font-mono text-[10px] uppercase tracking-widest text-slate-400">Production AI</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden items-center gap-7 lg:flex" aria-label="Primary Navigation">
+        <a href="#projects" data-i18n="nav.projects" class="text-sm font-medium text-slate-300 transition-colors hover:text-cyanx">Proyectos</a>
+        <a href="#services" data-i18n="nav.services" class="text-sm font-medium text-slate-300 transition-colors hover:text-cyanx">Servicios</a>
+        <a href="#skills" data-i18n="nav.skills" class="text-sm font-medium text-slate-300 transition-colors hover:text-cyanx">Stack Técnico</a>
+        <a href="#credentials" data-i18n="nav.credentials" class="text-sm font-medium text-slate-300 transition-colors hover:text-cyanx">Credenciales</a>
+        <a href="#contact" data-i18n="nav.contact" class="text-sm font-medium text-slate-300 transition-colors hover:text-cyanx">Contacto</a>
+      </nav>
+
+      <!-- Right Controls: Language Toggle, Export PDF, Hire CTA -->
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <!-- ES / EN Toggle Switch -->
+        <div class="flex items-center rounded-xl border border-slate-700/80 bg-navy-850 p-1 font-mono text-xs" role="group" aria-label="Language Switch">
+          <button id="btn-lang-es" type="button" onclick="setLanguage('es')" class="rounded-lg px-2.5 py-1.5 font-semibold transition-all bg-cyanx text-navy-950">ES</button>
+          <button id="btn-lang-en" type="button" onclick="setLanguage('en')" class="rounded-lg px-2.5 py-1.5 font-semibold transition-all text-slate-400 hover:text-slate-100">EN</button>
+        </div>
+
+        <!-- Export PDF Button -->
+        <button type="button" onclick="exportPortfolioPDF()" class="hidden items-center gap-1.5 rounded-xl border border-slate-700 bg-navy-850 px-3 py-2 text-xs font-medium text-slate-200 transition-all hover:border-cyanx/60 hover:text-cyanx sm:inline-flex">
+          <i data-lucide="printer" class="h-3.5 w-3.5"></i>
+          <span data-i18n="nav.exportPdf">Exportar PDF</span>
+        </button>
+
+        <!-- Hire Me CTA -->
+        <a href="#contact" class="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-cyanx to-emeraldx px-3.5 py-2 text-xs font-semibold text-navy-950 shadow-glowCyan transition-all hover:brightness-110 sm:px-4 sm:text-sm">
+          <span data-i18n="nav.hire">Contratar</span>
+          <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+        </a>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="mobile-menu-btn" type="button" onclick="toggleMobileMenu()" class="inline-flex items-center justify-center rounded-xl border border-slate-700 bg-navy-850 p-2 text-slate-300 hover:border-cyanx hover:text-cyanx lg:hidden" aria-label="Toggle Menu">
+          <i data-lucide="menu" class="h-5 w-5"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden border-t border-slate-800 bg-navy-950/95 px-4 py-4 lg:hidden">
+      <div class="flex flex-col space-y-2">
+        <a href="#projects" onclick="toggleMobileMenu()" data-i18n="nav.projects" class="rounded-xl px-3 py-2.5 text-sm font-medium text-slate-200 hover:bg-navy-850 hover:text-cyanx">Proyectos</a>
+        <a href="#services" onclick="toggleMobileMenu()" data-i18n="nav.services" class="rounded-xl px-3 py-2.5 text-sm font-medium text-slate-200 hover:bg-navy-850 hover:text-cyanx">Servicios</a>
+        <a href="#skills" onclick="toggleMobileMenu()" data-i18n="nav.skills" class="rounded-xl px-3 py-2.5 text-sm font-medium text-slate-200 hover:bg-navy-850 hover:text-cyanx">Stack Técnico</a>
+        <a href="#credentials" onclick="toggleMobileMenu()" data-i18n="nav.credentials" class="rounded-xl px-3 py-2.5 text-sm font-medium text-slate-200 hover:bg-navy-850 hover:text-cyanx">Credenciales</a>
+        <a href="#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact" class="rounded-xl px-3 py-2.5 text-sm font-medium text-slate-200 hover:bg-navy-850 hover:text-cyanx">Contacto</a>
+        <button type="button" onclick="toggleMobileMenu(); exportPortfolioPDF();" class="mt-2 flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-navy-850 px-3 py-2.5 text-sm font-medium text-cyanx">
+          <i data-lucide="printer" class="h-4 w-4"></i>
+          <span data-i18n="nav.exportPdf">Exportar PDF</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="bg-tech-grid">
+
+    <!-- ===================================================================
+         2. HERO SECTION
+         =================================================================== -->
+    <section class="relative overflow-hidden border-b border-slate-800/70 pt-12 pb-16 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <!-- Print-Only Executive Header -->
+        <div class="hidden print-only mb-4 border-b-2 border-slate-300 pb-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <h1 class="font-heading text-2xl font-bold">Juan Manuel Díaz</h1>
+              <p class="text-sm font-semibold">Machine Learning &amp; MLOps Engineer | Computer Vision &amp; Production AI Systems</p>
+            </div>
+            <div class="text-right font-mono text-xs">
+              <div>juanmanuel.diaz@utp.edu.co | +(57) 3013510954</div>
+              <div>github.com/AIbackbone | linkedin.com/in/juanmanueldiazg</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
+          <!-- Hero Left Column -->
+          <div class="lg:col-span-6">
+            <!-- Pulsing Availability Pill -->
+            <div class="mb-6 inline-flex items-center gap-2.5 rounded-full border border-emeraldx/35 bg-emeraldx/10 px-4 py-1.5 text-xs font-medium text-emerald-300 print-badge">
+              <span class="relative flex h-2.5 w-2.5">
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emeraldx opacity-75"></span>
+                <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-emeraldx"></span>
+              </span>
+              <span data-i18n="hero.availability">Disponible para proyectos Freelance · Upwork / Fiverr / B2B</span>
+            </div>
+
+            <!-- Role Eyebrow -->
+            <p class="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-cyanx sm:text-sm" data-i18n="hero.role">
+              Juan Manuel Díaz · ML &amp; MLOps Engineer · Computer Vision
+            </p>
+
+            <!-- Flagship Headline -->
+            <h1 class="font-heading text-3xl font-bold leading-[1.12] tracking-tight text-slate-50 sm:text-4xl lg:text-5xl">
+              <span data-i18n="hero.headlinePre">Llevo modelos de Machine Learning</span>
+              <span class="bg-gradient-to-r from-cyanx via-sky-300 to-emeraldx bg-clip-text text-transparent" data-i18n="hero.headlineAccent"> del Notebook a Producción.</span>
+            </h1>
+
+            <!-- Subheadline -->
+            <p class="mt-5 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg" data-i18n="hero.subheadline">
+              Ingeniero con doble Máster en Francia (École des Mines de Saint-Étienne). Diseño sistemas de Visión por Computador, servicios Backend en Python y pipelines MLOps auditables, testeados y contenerizados para clientes globales.
+            </p>
+
+            <!-- Value Pillars -->
+            <div class="mt-6 flex flex-wrap gap-2.5">
+              <span class="inline-flex items-center gap-1.5 rounded-xl border border-slate-700/90 bg-navy-850/90 px-3 py-1.5 font-mono text-xs text-slate-200 print-badge">
+                <i data-lucide="shield-check" class="h-3.5 w-3.5 text-cyanx"></i>
+                <span data-i18n="hero.pillar1">POO &amp; SOLID</span>
+              </span>
+              <span class="inline-flex items-center gap-1.5 rounded-xl border border-slate-700/90 bg-navy-850/90 px-3 py-1.5 font-mono text-xs text-slate-200 print-badge">
+                <i data-lucide="file-json" class="h-3.5 w-3.5 text-emeraldx"></i>
+                <span data-i18n="hero.pillar2">Data Contracts &amp; Tests</span>
+              </span>
+              <span class="inline-flex items-center gap-1.5 rounded-xl border border-slate-700/90 bg-navy-850/90 px-3 py-1.5 font-mono text-xs text-slate-200 print-badge">
+                <i data-lucide="container" class="h-3.5 w-3.5 text-violetx"></i>
+                <span data-i18n="hero.pillar3">Docker · MLflow · AWS</span>
+              </span>
+            </div>
+
+            <!-- Action CTAs & Quick Links -->
+            <div class="mt-8 flex flex-wrap items-center gap-3.5 no-print">
+              <a href="#projects" class="inline-flex items-center gap-2 rounded-xl bg-cyanx px-5 py-3 text-sm font-semibold text-navy-950 shadow-glowCyan transition-all hover:bg-cyan-300">
+                <i data-lucide="layers" class="h-4 w-4"></i>
+                <span data-i18n="hero.ctaPrimary">Explorar Casos de Estudio</span>
+              </a>
+              <a href="#services" class="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-navy-850/90 px-5 py-3 text-sm font-semibold text-slate-100 transition-all hover:border-cyanx/70 hover:text-cyanx">
+                <i data-lucide="briefcase" class="h-4 w-4"></i>
+                <span data-i18n="hero.ctaSecondary">Ver Paquetes Freelance</span>
+              </a>
+              <div class="flex items-center gap-2 pl-1">
+                <a href="https://github.com/AIbackbone" target="_blank" rel="noopener noreferrer" title="GitHub (@AIbackbone)" class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-700 bg-navy-850 text-slate-300 transition-all hover:border-cyanx hover:text-cyanx">
+                  <i data-lucide="github" class="h-5 w-5"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/juanmanueldiazg" target="_blank" rel="noopener noreferrer" title="LinkedIn" class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-700 bg-navy-850 text-slate-300 transition-all hover:border-cyanx hover:text-cyanx">
+                  <i data-lucide="linkedin" class="h-5 w-5"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Right Column: Interactive Animated SVG Production ML Pipeline -->
+          <div class="lg:col-span-6">
+            <div class="glass-card rounded-2xl p-4 sm:p-5 shadow-2xl">
+              <!-- Top Window Bar -->
+              <div class="mb-3 flex items-center justify-between border-b border-slate-800 pb-3">
+                <div class="flex items-center gap-2">
+                  <span class="h-2.5 w-2.5 rounded-full bg-rose-500/80"></span>
+                  <span class="h-2.5 w-2.5 rounded-full bg-amber-400/80"></span>
+                  <span class="h-2.5 w-2.5 rounded-full bg-emeraldx/80"></span>
+                  <span class="ml-2 font-mono text-xs text-slate-400">production_ml_pipeline.svg</span>
+                </div>
+                <span class="interactive-hint inline-flex items-center gap-1 rounded-full bg-cyanx/10 px-2.5 py-0.5 font-mono text-[11px] text-cyanx">
+                  <i data-lucide="mouse-pointer-click" class="h-3 w-3"></i>
+                  <span data-i18n="hero.pipelineHint">Haz clic en cada etapa</span>
+                </span>
+              </div>
+
+              <!-- Custom Interactive SVG Pipeline Diagram -->
+              <div class="rounded-xl bg-navy-950/90 p-2 sm:p-3 border border-slate-800/80 print-dark-svg">
+                <svg viewBox="0 0 640 255" class="w-full h-auto select-none" role="img" aria-label="Interactive Production Machine Learning Pipeline">
+                  <defs>
+                    <linearGradient id="gradCyanEmerald" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#06B6D4" />
+                      <stop offset="100%" stop-color="#10B981" />
+                    </linearGradient>
+                    <linearGradient id="gradCyanViolet" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#06B6D4" />
+                      <stop offset="100%" stop-color="#8B5CF6" />
+                    </linearGradient>
+                    <filter id="glowSoft" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="3" result="blur" />
+                      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    </filter>
+                  </defs>
+
+                  <!-- Subtle Background Grid inside SVG -->
+                  <g opacity="0.18" stroke="#334155" stroke-width="0.6">
+                    <line x1="0" y1="64" x2="640" y2="64" />
+                    <line x1="0" y1="128" x2="640" y2="128" />
+                    <line x1="0" y1="192" x2="640" y2="192" />
+                    <line x1="160" y1="0" x2="160" y2="255" />
+                    <line x1="320" y1="0" x2="320" y2="255" />
+                    <line x1="480" y1="0" x2="480" y2="255" />
+                  </g>
+
+                  <!-- Animated Connector Lines -->
+                  <!-- Stage 1 -> Stage 2 -->
+                  <path d="M 148 75 L 222 75" stroke="#1E293B" stroke-width="3" fill="none" />
+                  <path d="M 148 75 L 222 75" stroke="#06B6D4" stroke-width="2" fill="none" class="svg-flow-line" />
+                  <!-- Stage 2 -> Stage 3 -->
+                  <path d="M 392 75 L 462 75" stroke="#1E293B" stroke-width="3" fill="none" />
+                  <path d="M 392 75 L 462 75" stroke="#10B981" stroke-width="2" fill="none" class="svg-flow-line" />
+                  <!-- Stage 3 -> Stage 4 (Curved drop down) -->
+                  <path d="M 545 112 C 545 148, 420 132, 392 178" stroke="#1E293B" stroke-width="3" fill="none" />
+                  <path d="M 545 112 C 545 148, 420 132, 392 178" stroke="url(#gradCyanViolet)" stroke-width="2" fill="none" class="svg-flow-line" />
+                  <!-- Stage 4 -> Stage 5 -->
+                  <path d="M 392 190 L 448 190" stroke="#1E293B" stroke-width="3" fill="none" />
+                  <path d="M 392 190 L 448 190" stroke="#10B981" stroke-width="2" fill="none" class="svg-flow-line" />
+                  <!-- Feedback Loop Stage 5 -> Stage 2 (Drift Retraining) -->
+                  <path d="M 535 228 C 535 248, 120 248, 120 190 C 120 155, 210 155, 232 115" stroke="#8B5CF6" stroke-opacity="0.45" stroke-width="1.5" stroke-dasharray="4 5" fill="none" />
+                  <text x="148" y="236" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="8.5">CI/CD &amp; Drift Feedback Loop</text>
+
+                  <!-- STAGE 1: Jupyter Notebook -->
+                  <g id="hero-node-0" class="pipeline-node" onclick="selectHeroStage(0)" tabindex="0" role="button">
+                    <rect class="node-box" x="18" y="38" width="130" height="74" rx="12" fill="#131C31" stroke="#334155" stroke-width="1.5" />
+                    <circle cx="36" cy="56" r="5" fill="#F59E0B" />
+                    <text x="48" y="59" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="9">01 · PROTOTYPE</text>
+                    <text x="30" y="81" fill="#F8FAFC" font-family="Space Grotesk, sans-serif" font-size="12.5" font-weight="700">Jupyter Lab</text>
+                    <text x="30" y="98" fill="#64748B" font-family="JetBrains Mono, monospace" font-size="9">EDA &amp; R&amp;D Model</text>
+                  </g>
+
+                  <!-- STAGE 2: JSON Schema Guard -->
+                  <g id="hero-node-1" class="pipeline-node active-node" onclick="selectHeroStage(1)" tabindex="0" role="button">
+                    <rect class="node-box" x="222" y="38" width="170" height="74" rx="12" fill="#131C31" stroke="#06B6D4" stroke-width="1.8" />
+                    <circle cx="240" cy="56" r="5" fill="#06B6D4" class="svg-pulse-ring" />
+                    <text x="252" y="59" fill="#06B6D4" font-family="JetBrains Mono, monospace" font-size="9">02 · DATA GUARD</text>
+                    <text x="234" y="81" fill="#F8FAFC" font-family="Space Grotesk, sans-serif" font-size="12.5" font-weight="700">JSON Schema</text>
+                    <text x="234" y="98" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="9">jsonschema · Contracts</text>
+                  </g>
+
+                  <!-- STAGE 3: Modular OOP / SOLID -->
+                  <g id="hero-node-2" class="pipeline-node" onclick="selectHeroStage(2)" tabindex="0" role="button">
+                    <rect class="node-box" x="462" y="38" width="160" height="74" rx="12" fill="#131C31" stroke="#334155" stroke-width="1.5" />
+                    <circle cx="480" cy="56" r="5" fill="#10B981" />
+                    <text x="492" y="59" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="9">03 · REFACTOR</text>
+                    <text x="474" y="81" fill="#F8FAFC" font-family="Space Grotesk, sans-serif" font-size="12.5" font-weight="700">OOP + SOLID</text>
+                    <text x="474" y="98" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="9">pytest · Mocks · CLI</text>
+                  </g>
+
+                  <!-- STAGE 4: Docker + FastAPI / Flask -->
+                  <g id="hero-node-3" class="pipeline-node" onclick="selectHeroStage(3)" tabindex="0" role="button">
+                    <rect class="node-box" x="218" y="153" width="174" height="74" rx="12" fill="#131C31" stroke="#334155" stroke-width="1.5" />
+                    <circle cx="236" cy="171" r="5" fill="#8B5CF6" />
+                    <text x="248" y="174" fill="#A78BFA" font-family="JetBrains Mono, monospace" font-size="9">04 · SERVING</text>
+                    <text x="230" y="196" fill="#F8FAFC" font-family="Space Grotesk, sans-serif" font-size="12.5" font-weight="700">Docker + API</text>
+                    <text x="230" y="213" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="9">FastAPI · Flask · AWS</text>
+                  </g>
+
+                  <!-- STAGE 5: MLflow & Monitoring -->
+                  <g id="hero-node-4" class="pipeline-node" onclick="selectHeroStage(4)" tabindex="0" role="button">
+                    <rect class="node-box" x="448" y="153" width="174" height="74" rx="12" fill="#131C31" stroke="#334155" stroke-width="1.5" />
+                    <circle cx="466" cy="171" r="5" fill="#10B981" class="svg-pulse-ring" />
+                    <text x="478" y="174" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="9">05 · OBSERVABILITY</text>
+                    <text x="460" y="196" fill="#F8FAFC" font-family="Space Grotesk, sans-serif" font-size="12.5" font-weight="700">MLflow &amp; Drift</text>
+                    <text x="460" y="213" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="9">Evidently · Grafana</text>
+                  </g>
+
+                  <!-- Status Pill Top Left inside SVG -->
+                  <rect x="18" y="156" width="150" height="58" rx="10" fill="#0F172A" stroke="#1E293B" stroke-width="1" />
+                  <text x="30" y="174" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="600">● PRODUCTION READY</text>
+                  <text x="30" y="190" fill="#CBD5E1" font-family="JetBrains Mono, monospace" font-size="8.5">Coverage: Unit + Mocks</text>
+                  <text x="30" y="204" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="8.5">Zero Silent Failures</text>
+                </svg>
+              </div>
+
+              <!-- Live Stage Inspector Card (updates on SVG click) -->
+              <div id="hero-stage-inspector" class="mt-3.5 rounded-xl border border-cyanx/30 bg-navy-900/90 p-4 transition-all">
+                <!-- Dynamically populated by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4-Card Metrics Strip -->
+        <div id="metrics-strip" class="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <!-- Dynamically populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         3. FEATURED PROJECTS SECTION (CASE STUDIES — RIGHT AFTER HERO)
+         =================================================================== -->
+    <section id="projects" class="border-b border-slate-800/70 py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+          <div class="max-w-2xl">
+            <span class="inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-cyanx">
+              <i data-lucide="terminal" class="h-3.5 w-3.5"></i>
+              <span data-i18n="projects.eyebrow">Casos de Estudio · Ingeniería Demostrable</span>
+            </span>
+            <h2 class="mt-2 font-heading text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl" data-i18n="projects.title">
+              Proyectos Destacados en Producción
+            </h2>
+            <p class="mt-3 text-base text-slate-400" data-i18n="projects.subtitle">
+              Haz clic en cualquier proyecto para inspeccionar su diagrama de arquitectura, explorar el árbol real del repositorio estilo VS Code y revisar sus garantías de producción.
+            </p>
+          </div>
+
+          <!-- Interactive Category / Tech Filter Pills -->
+          <div id="filter-bar" class="flex flex-wrap gap-2 no-print" role="tablist" aria-label="Project Technology Filters">
+            <!-- Dynamically populated by JS -->
+          </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div id="projects-grid" class="mt-10 grid grid-cols-1 gap-7 lg:grid-cols-3">
+          <!-- Dynamically populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         4. PRODUCTIZED FREELANCE SERVICES (UPWORK / FIVERR PRO STYLE)
+         =================================================================== -->
+    <section id="services" class="border-b border-slate-800/70 bg-navy-900/35 py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center">
+          <span class="inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-emeraldx">
+            <i data-lucide="package-check" class="h-3.5 w-3.5"></i>
+            <span data-i18n="services.eyebrow">Catálogo Freelance · Upwork &amp; Fiverr Pro</span>
+          </span>
+          <h2 class="mt-2 font-heading text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl" data-i18n="services.title">
+            Servicios Productizados con Entregables Claros
+          </h2>
+          <p class="mt-3 text-base text-slate-400" data-i18n="services.subtitle">
+            Sin prototipos desechables. Cada paquete incluye código limpio, documentación técnica, reproducibilidad y pruebas automatizadas listas para tu equipo.
+          </p>
+        </div>
+
+        <!-- 3 Service Package Cards -->
+        <div id="services-grid" class="mt-12 grid grid-cols-1 gap-7 lg:grid-cols-3">
+          <!-- Dynamically populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         5. TECHNICAL SKILLS MATRIX
+         =================================================================== -->
+    <section id="skills" class="border-b border-slate-800/70 py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl">
+          <span class="inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-violetx">
+            <i data-lucide="code-2" class="h-3.5 w-3.5"></i>
+            <span data-i18n="skills.eyebrow">Arquitectura &amp; Herramientas</span>
+          </span>
+          <h2 class="mt-2 font-heading text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl" data-i18n="skills.title">
+            Matriz de Stack Técnico
+          </h2>
+          <p class="mt-3 text-base text-slate-400" data-i18n="skills.subtitle">
+            Combinación de rigor cuantitativo en Ciencia de Datos con ingeniería backend en Python, contenerización, nube AWS y observabilidad MLOps.
+          </p>
+        </div>
+
+        <div id="skills-grid" class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+          <!-- Dynamically populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         6. INTERNATIONAL CREDIBILITY & TRUST SIGNALS
+         =================================================================== -->
+    <section id="credentials" class="border-b border-slate-800/70 bg-navy-900/35 py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          <div class="max-w-2xl">
+            <span class="inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-cyanx">
+              <i data-lucide="award" class="h-3.5 w-3.5"></i>
+              <span data-i18n="credentials.eyebrow">Trayectoria Internacional &amp; Respaldo</span>
+            </span>
+            <h2 class="mt-2 font-heading text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl" data-i18n="credentials.title">
+              Credenciales y Señales de Confianza
+            </h2>
+          </div>
+
+          <!-- Passeport Talent EU Trust Pill -->
+          <div class="inline-flex items-center gap-2 rounded-xl border border-emeraldx/40 bg-emeraldx/10 px-4 py-2.5 text-xs font-semibold text-emerald-300 print-badge">
+            <i data-lucide="globe-2" class="h-4 w-4 shrink-0 text-emeraldx"></i>
+            <span data-i18n="credentials.passeportBadge">Éligible Passeport Talent (Francia / UE — Sin permiso de trabajo requerido)</span>
+          </div>
+        </div>
+
+        <div id="credentials-grid" class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+          <!-- Dynamically populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         7. CONTACT & QUICK PROJECT BRIEF GENERATOR
+         =================================================================== -->
+    <section id="contact" class="py-16 sm:py-20 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
+
+          <!-- Left Column: Direct Contact Channels -->
+          <div class="lg:col-span-5">
+            <span class="inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-cyanx">
+              <i data-lucide="send" class="h-3.5 w-3.5"></i>
+              <span data-i18n="contact.eyebrow">Hablemos de tu Sistema de IA</span>
+            </span>
+            <h2 class="mt-2 font-heading text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl" data-i18n="contact.title">
+              ¿Listo para llevar tu modelo a producción?
+            </h2>
+            <p class="mt-3 text-base leading-relaxed text-slate-400" data-i18n="contact.subtitle">
+              Disponible para contratos en Upwork, Fiverr Pro y consultoría técnica directa B2B en Español, Inglés (B2) y Francés (C1).
+            </p>
+
+            <!-- Primary Email Copy Card -->
+            <div class="glass-card mt-7 rounded-2xl p-5">
+              <span class="font-mono text-[11px] uppercase tracking-wider text-slate-400" data-i18n="contact.emailLabel">Correo Electrónico Directo</span>
+              <div class="mt-2 flex flex-wrap items-center justify-between gap-3">
+                <span class="font-mono text-sm font-semibold text-cyanx sm:text-base break-all">juanmanuel.diaz@utp.edu.co</span>
+                <button type="button" onclick="copyEmail()" class="no-print inline-flex items-center gap-1.5 rounded-xl bg-cyanx/15 border border-cyanx/40 px-3.5 py-2 text-xs font-semibold text-cyan-200 transition-all hover:bg-cyanx hover:text-navy-950">
+                  <i data-lucide="copy" class="h-3.5 w-3.5"></i>
+                  <span data-i18n="contact.copyEmail">Copiar Email</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Direct Social & Phone Links -->
+            <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <a href="https://github.com/AIbackbone" target="_blank" rel="noopener noreferrer" class="glass-card glass-card-hover flex items-center gap-3 rounded-xl p-4">
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-800 text-cyanx">
+                  <i data-lucide="github" class="h-5 w-5"></i>
+                </div>
+                <div class="min-w-0">
+                  <div class="text-xs text-slate-400">GitHub</div>
+                  <div class="truncate font-mono text-sm font-semibold text-slate-100">@AIbackbone</div>
+                </div>
+              </a>
+
+              <a href="https://www.linkedin.com/in/juanmanueldiazg" target="_blank" rel="noopener noreferrer" class="glass-card glass-card-hover flex items-center gap-3 rounded-xl p-4">
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-800 text-cyanx">
+                  <i data-lucide="linkedin" class="h-5 w-5"></i>
+                </div>
+                <div class="min-w-0">
+                  <div class="text-xs text-slate-400">LinkedIn</div>
+                  <div class="truncate font-mono text-sm font-semibold text-slate-100">juanmanueldiazg</div>
+                </div>
+              </a>
+
+              <a href="tel:+573013510954" class="glass-card glass-card-hover flex items-center gap-3 rounded-xl p-4 sm:col-span-2">
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-800 text-emeraldx">
+                  <i data-lucide="phone" class="h-5 w-5"></i>
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="text-xs text-slate-400" data-i18n="contact.phoneLabel">Teléfono / WhatsApp Internacional</div>
+                  <div class="font-mono text-sm font-semibold text-slate-100">+(57) 301 351 0954</div>
+                </div>
+                <span class="rounded-full bg-emeraldx/15 px-2.5 py-1 font-mono text-[11px] text-emerald-300">ES · EN · FR</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Quick Project Brief Builder -->
+          <div id="brief-builder-panel" class="lg:col-span-7 no-print">
+            <div class="glass-card rounded-2xl p-6 sm:p-7">
+              <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-4">
+                <div>
+                  <h3 class="font-heading text-xl font-bold text-slate-50" data-i18n="brief.title">Generador Rápido de Project Brief</h3>
+                  <p class="mt-0.5 text-xs text-slate-400" data-i18n="brief.subtitle">Selecciona tu paquete y objetivo para crear un mensaje estructurado listo para Upwork, Fiverr o Email.</p>
+                </div>
+                <span class="rounded-lg bg-violetx/15 border border-violetx/35 px-2.5 py-1 font-mono text-[11px] text-violet-300">15-sec Scope</span>
+              </div>
+
+              <!-- Package Selection Pills -->
+              <div class="mt-5">
+                <label class="block font-mono text-xs font-semibold uppercase tracking-wider text-slate-300" data-i18n="brief.selectPkg">1. Selecciona el Paquete de Servicio</label>
+                <div id="brief-package-options" class="mt-2.5 grid grid-cols-1 gap-2.5 sm:grid-cols-3">
+                  <!-- Dynamically populated by JS -->
+                </div>
+              </div>
+
+              <!-- Client Name & Timeline -->
+              <div class="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div>
+                  <label for="brief-name" class="block font-mono text-xs font-semibold uppercase tracking-wider text-slate-300" data-i18n="brief.nameLabel">2. Tu Nombre / Empresa</label>
+                  <input id="brief-name" type="text" oninput="updateBriefPreview()" placeholder="Alex / TechCorp" class="mt-1.5 w-full rounded-xl border border-slate-700 bg-navy-950/90 px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:border-cyanx focus:outline-none focus:ring-1 focus:ring-cyanx" />
+                </div>
+                <div>
+                  <label for="brief-timeline" class="block font-mono text-xs font-semibold uppercase tracking-wider text-slate-300" data-i18n="brief.timelineLabel">3. Horizonte Estimado</label>
+                  <select id="brief-timeline" onchange="updateBriefPreview()" class="mt-1.5 w-full rounded-xl border border-slate-700 bg-navy-950/90 px-3.5 py-2.5 text-sm text-slate-100 focus:border-cyanx focus:outline-none focus:ring-1 focus:ring-cyanx">
+                    <!-- Populated by JS -->
+                  </select>
+                </div>
+              </div>
+
+              <!-- Goal / Problem Input -->
+              <div class="mt-4">
+                <label for="brief-goal" class="block font-mono text-xs font-semibold uppercase tracking-wider text-slate-300" data-i18n="brief.goalLabel">4. Describe brevemente tu proyecto o reto técnico</label>
+                <textarea id="brief-goal" rows="2" oninput="updateBriefPreview()" class="mt-1.5 w-full rounded-xl border border-slate-700 bg-navy-950/90 px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:border-cyanx focus:outline-none focus:ring-1 focus:ring-cyanx" placeholder="Ej. Tenemos un notebook en PyTorch y necesitamos pasarlo a Docker + API REST con tests..."></textarea>
+              </div>
+
+              <!-- Live Generated Proposal Preview -->
+              <div class="mt-5 rounded-xl border border-slate-800 bg-navy-950 p-4">
+                <div class="mb-2 flex items-center justify-between">
+                  <span class="font-mono text-[11px] uppercase tracking-wider text-emeraldx">● Brief Preview</span>
+                  <span class="font-mono text-[11px] text-slate-500">Ready to send</span>
+                </div>
+                <pre id="brief-preview-text" class="whitespace-pre-wrap font-mono text-xs leading-relaxed text-slate-300"></pre>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="mt-5 flex flex-wrap items-center gap-3">
+                <button type="button" onclick="copyBrief()" class="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-cyanx/50 bg-cyanx/15 px-4 py-3 text-sm font-semibold text-cyan-200 transition-all hover:bg-cyanx hover:text-navy-950">
+                  <i data-lucide="clipboard-copy" class="h-4 w-4"></i>
+                  <span data-i18n="brief.copyBtn">Copiar Brief</span>
+                </button>
+                <a id="brief-mailto-btn" href="#" class="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyanx to-emeraldx px-4 py-3 text-sm font-semibold text-navy-950 shadow-glowCyan transition-all hover:brightness-110">
+                  <i data-lucide="mail" class="h-4 w-4"></i>
+                  <span data-i18n="brief.sendBtn">Enviar por Email</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================================================================
+       FOOTER
+       =================================================================== -->
+  <footer class="border-t border-slate-800/80 bg-navy-950 py-8 no-print">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 text-xs text-slate-400 sm:flex-row sm:px-6 lg:px-8">
+      <div class="font-mono">
+        <span class="font-semibold text-slate-200">Juan Manuel Díaz</span> · Machine Learning &amp; MLOps Engineer
+      </div>
+      <div class="flex items-center gap-4 font-mono">
+        <span data-i18n="footer.trilingual">ES Nativo · EN B2 · FR C1</span>
+        <span class="text-slate-700">|</span>
+        <span>Pereira, CO / France (EU Eligible)</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================
+       INTERACTIVE CASE STUDY MODAL (3 TABS + VS CODE REPO EXPLORER)
+       =================================================================== -->
+  <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-navy-950/85 p-3 backdrop-blur-md sm:p-6 no-print" role="dialog" aria-modal="true" aria-labelledby="modal-title" onclick="handleModalBackdropClick(event)">
+    <div class="relative flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-slate-700/90 bg-navy-900 shadow-2xl">
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between gap-4 border-b border-slate-800 bg-navy-950/90 px-5 py-4 sm:px-6">
+        <div class="min-w-0">
+          <div class="flex flex-wrap items-center gap-2">
+            <span id="modal-badge" class="rounded-lg bg-cyanx/15 border border-cyanx/35 px-2.5 py-0.5 font-mono text-[11px] font-semibold text-cyanx"></span>
+            <span id="modal-category" class="font-mono text-xs text-slate-400"></span>
+          </div>
+          <h3 id="modal-title" class="mt-1.5 font-heading text-lg font-bold text-slate-50 sm:text-xl"></h3>
+        </div>
+        <button type="button" onclick="closeProjectModal()" class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-slate-700 bg-navy-850 text-slate-300 transition-colors hover:border-rose-500/60 hover:text-rose-400" aria-label="Close modal">
+          <i data-lucide="x" class="h-5 w-5"></i>
+        </button>
+      </div>
+
+      <!-- Modal 3 Switchable Tabs Bar -->
+      <div class="flex flex-wrap gap-2 border-b border-slate-800 bg-navy-950/60 px-5 py-3 sm:px-6" role="tablist">
+        <button id="modal-tab-arch" type="button" onclick="switchModalTab('arch')" class="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all sm:text-sm">
+          <i data-lucide="git-branch" class="h-4 w-4"></i>
+          <span data-i18n="modal.tabArch">Arquitectura Visual</span>
+        </button>
+        <button id="modal-tab-repo" type="button" onclick="switchModalTab('repo')" class="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all sm:text-sm">
+          <i data-lucide="folder-tree" class="h-4 w-4"></i>
+          <span data-i18n="modal.tabRepo">Explorador del Repositorio</span>
+        </button>
+        <button id="modal-tab-guarantees" type="button" onclick="switchModalTab('guarantees')" class="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all sm:text-sm">
+          <i data-lucide="shield-check" class="h-4 w-4"></i>
+          <span data-i18n="modal.tabGuarantees">Garantías de Producción</span>
+        </button>
+      </div>
+
+      <!-- Modal Scrollable Content -->
+      <div id="modal-body" class="flex-1 overflow-y-auto p-5 sm:p-6">
+        <!-- Dynamically rendered by JS -->
+      </div>
+
+      <!-- Modal Footer Actions -->
+      <div class="flex flex-wrap items-center justify-between gap-3 border-t border-slate-800 bg-navy-950/90 px-5 py-3.5 sm:px-6">
+        <div id="modal-external-links" class="flex flex-wrap items-center gap-2.5">
+          <!-- GitHub & Docs links populated by JS -->
+        </div>
+        <button id="modal-hire-similar-btn" type="button" class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyanx to-emeraldx px-4 py-2.5 text-xs font-semibold text-navy-950 shadow-glowCyan transition-all hover:brightness-110 sm:text-sm">
+          <i data-lucide="sparkles" class="h-4 w-4"></i>
+          <span data-i18n="modal.requestSimilar">Solicitar Arquitectura Similar</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       ANIMATED TOAST NOTIFICATION CONTAINER (Replaces alert() completely)
+       =================================================================== -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2.5 pointer-events-none no-print" aria-live="polite"></div>
+
+  <!-- ===================================================================
+       APPLICATION STATE, BILINGUAL DATA & INTERACTIVE LOGIC
+       =================================================================== -->
+  <script>
+    /**
+     * Complete Bilingual Portfolio Data (ES / EN)
+     * Implements Portfolio v2.0 JSON Plan with full interactive metadata,
+     * real repository file trees, code inspection snippets, and SVG diagrams.
+     */
+    const APP_DATA = {
+      es: {
+        nav: {
+          projects: 'Proyectos',
+          services: 'Servicios',
+          skills: 'Stack Técnico',
+          credentials: 'Credenciales',
+          contact: 'Contacto',
+          exportPdf: 'Exportar PDF',
+          hire: 'Contratar'
+        },
+        hero: {
+          availability: 'Disponible para proyectos Freelance · Upwork / Fiverr / B2B',
+          role: 'Juan Manuel Díaz · ML & MLOps Engineer · Computer Vision',
+          headlinePre: 'Llevo modelos de Machine Learning',
+          headlineAccent: ' del Notebook a Producción.',
+          subheadline: 'Ingeniero con doble Máster en Francia (École des Mines de Saint-Étienne). Diseño sistemas de Visión por Computador, servicios Backend en Python y pipelines MLOps auditables, testeados y contenerizados.',
+          pillar1: 'POO & SOLID',
+          pillar2: 'Data Contracts & Tests',
+          pillar3: 'Docker · MLflow · AWS',
+          ctaPrimary: 'Explorar Casos de Estudio',
+          ctaSecondary: 'Ver Paquetes Freelance',
+          pipelineHint: 'Haz clic en cada etapa',
+          stages: [
+            {
+              badge: 'ETAPA 01 · EXPERIMENTACIÓN',
+              title: 'Jupyter Notebook & EDA',
+              desc: 'Punto de partida típico de los clientes: prototipos monolíticos en notebooks con lógica acoplada y difícil de reproducir fuera del entorno local.',
+              tools: ['Python', 'Pandas', 'NumPy', 'EDA'],
+              impact: 'Diagnóstico de modos de fallo y separación de lógica antes de refactorizar.'
+            },
+            {
+              badge: 'ETAPA 02 · VALIDACIÓN DEFENSIVA',
+              title: 'JSON Schema Guard (Schema-First)',
+              desc: 'Contratos de datos estrictos con jsonschema que inspeccionan dimensiones de tensores, canales y tipos antes de ejecutar la inferencia o el entrenamiento.',
+              tools: ['jsonschema', 'configs/data_schema.py', 'YAML'],
+              impact: 'Intercepta archivos corruptos o malformados evitando fallos silenciosos en producción.'
+            },
+            {
+              badge: 'ETAPA 03 · INGENIERÍA DE SOFTWARE',
+              title: 'Arquitectura Modular OOP / SOLID',
+              desc: 'Desacoplamiento completo en clases abstractas (base_model.py), cargadores de datos, puntos CLI (main.py) y suites de pruebas unitarias con objetos Mock.',
+              tools: ['POO/SOLID', 'pytest', 'unittest.mock (@patch)', 'Logging YAML'],
+              impact: 'Código mantenible que valida lógica crítica sin sobrecargar memoria ni disco.'
+            },
+            {
+              badge: 'ETAPA 04 · EMPAQUETADO & SERVING',
+              title: 'Docker + FastAPI / Flask + AWS',
+              desc: 'Exposición del modelo mediante APIs REST, Nginx y contenedores reproducibles, o despliegue escalable vía streaming (AWS Kinesis & Lambda) y batch.',
+              tools: ['Docker', 'FastAPI', 'Flask', 'Nginx', 'AWS'],
+              impact: 'Integración directa y sin fricción con las aplicaciones de negocio del cliente.'
+            },
+            {
+              badge: 'ETAPA 05 · OBSERVABILIDAD MLOPS',
+              title: 'MLflow, Drift Monitoring & CI/CD',
+              desc: 'Trazabilidad total de experimentos y registros de modelos con MLflow, tableros de data drift en vivo y automatización CI/CD + IaC.',
+              tools: ['MLflow', 'Evidently AI', 'Prometheus', 'Grafana', 'GitHub Actions', 'Terraform'],
+              impact: 'Visibilidad continua del rendimiento en producción y reentrenamiento controlado.'
+            }
+          ],
+          metrics: [
+            { value: 'End-to-End', label: 'Ingesta → Modelo → API → Monitoreo', icon: 'workflow', color: 'text-cyanx' },
+            { value: '2× MSc.', label: 'École des Mines de Saint-Étienne, Francia', icon: 'graduation-cap', color: 'text-emeraldx' },
+            { value: '3 Idiomas', label: 'ES Nativo · EN B2 · FR C1', icon: 'languages', color: 'text-violetx' },
+            { value: 'SOLID + Tests', label: 'Código Python listo para producción', icon: 'check-circle-2', color: 'text-cyanx' }
+          ]
+        },
+        projects: {
+          eyebrow: 'Casos de Estudio · Ingeniería Demostrable',
+          title: 'Proyectos Destacados en Producción',
+          subtitle: 'Haz clic en cualquier proyecto para inspeccionar su diagrama de arquitectura, explorar el árbol real del repositorio estilo VS Code y revisar sus garantías de producción.',
+          openBtn: 'Abrir Caso de Estudio',
+          viewRepo: 'Ver en GitHub',
+          viewDocs: 'Documentación',
+          filters: [
+            { id: 'all', label: 'Todos' },
+            { id: 'cv', label: 'Computer Vision' },
+            { id: 'pytorch', label: 'PyTorch' },
+            { id: 'tensorflow', label: 'TensorFlow' },
+            { id: 'mlops', label: 'MLOps & AWS' },
+            { id: 'docker', label: 'Docker' }
+          ]
+        },
+        modal: {
+          tabArch: 'Arquitectura Visual',
+          tabRepo: 'Explorador del Repositorio',
+          tabGuarantees: 'Garantías de Producción',
+          problemTitle: 'Problema de Negocio',
+          solutionTitle: 'Solución de Ingeniería',
+          pipelineTitle: 'Pipeline Interactivo (Haz clic en cada paso)',
+          repoHint: 'Selecciona un archivo en el árbol para inspeccionar su responsabilidad técnica',
+          guaranteesTitle: 'Entregables y Garantías de Producción',
+          stackTitle: 'Stack Tecnológico Utilizado',
+          requestSimilar: 'Solicitar Arquitectura Similar',
+          activeStepLabel: 'Inspección de Etapa'
+        },
+        services: {
+          eyebrow: 'Catálogo Freelance · Upwork & Fiverr Pro',
+          title: 'Servicios Productizados con Entregables Claros',
+          subtitle: 'Sin prototipos desechables. Cada paquete incluye código limpio, documentación técnica, reproducibilidad y pruebas automatizadas listas para tu equipo.',
+          idealLabel: 'Ideal para:',
+          ctaBtn: 'Solicitar Cotización',
+          items: [
+            {
+              id: 'srv-cv-mvp',
+              badge: 'Especialidad Core',
+              accent: 'cyan',
+              highlighted: false,
+              title: 'Visión por Computador y Deep Learning a Medida',
+              subtitle: 'Segmentación semántica (U-Net) y clasificación industrial o médica (CNNs).',
+              idealFor: 'Startups de IA, manufactura (control de calidad), medtech y agrotech.',
+              deliverables: [
+                'Pipeline reproducible de ingesta, normalización y Data Augmentation',
+                'Arquitecturas personalizadas en PyTorch o TensorFlow (CNN / U-Net)',
+                'Evaluación rigurosa de métricas y análisis de modos de fallo en casos borde',
+                'Repositorio modular documentado con scripts de entrenamiento e inferencia'
+              ],
+              techTags: ['PyTorch', 'TensorFlow', 'U-Net', 'CNNs', 'Computer Vision']
+            },
+            {
+              id: 'srv-notebook-to-prod',
+              badge: 'Más Solicitado',
+              accent: 'emerald',
+              highlighted: true,
+              title: 'De Jupyter Notebook a Servicio Backend en Producción',
+              subtitle: 'Refactorización de código experimental a software mantenible y escalable.',
+              idealFor: 'Equipos que tienen un modelo que funciona en local pero falla al integrarlo.',
+              deliverables: [
+                'Arquitectura orientada a objetos (POO, clases base abstractas y SOLID)',
+                'Contratos de datos pre-ingesta con jsonschema y logging estructurado YAML',
+                'Pruebas unitarias y de integración (unittest / pytest / unittest.mock)',
+                'Exposición vía API REST (Flask / FastAPI), Nginx y contenedor Docker'
+              ],
+              techTags: ['Python', 'FastAPI', 'Flask', 'Docker', 'jsonschema', 'pytest']
+            },
+            {
+              id: 'srv-mlops-end2end',
+              badge: 'Escala & Confiabilidad',
+              accent: 'violet',
+              highlighted: false,
+              title: 'Arquitectura MLOps, Despliegue Cloud y Monitoreo',
+              subtitle: 'Automatización, versionado y observabilidad continua del ciclo de vida ML.',
+              idealFor: 'Empresas que necesitan trazabilidad de modelos y detección de drift.',
+              deliverables: [
+                'Experiment Tracking y Model Registry centralizado con MLflow',
+                'Orquestación de pipelines y despliegue online (API/Streaming AWS) o batch',
+                'Dashboards de monitoreo y data drift (Evidently AI, Prometheus, Grafana)',
+                'Flujos CI/CD con GitHub Actions, pre-commit hooks e IaC con Terraform'
+              ],
+              techTags: ['MLflow', 'AWS', 'Evidently AI', 'Grafana', 'GitHub Actions', 'Terraform']
+            }
+          ]
+        },
+        skills: {
+          eyebrow: 'Arquitectura & Herramientas',
+          title: 'Matriz de Stack Técnico',
+          subtitle: 'Combinación de rigor cuantitativo en Ciencia de Datos con ingeniería backend en Python, contenerización, nube AWS y observabilidad MLOps.',
+          categories: [
+            {
+              title: 'Machine Learning & Computer Vision',
+              icon: 'brain-circuit',
+              accent: 'cyan',
+              items: ['PyTorch', 'TensorFlow', 'Keras', 'Scikit-Learn', 'XGBoost', 'CNNs', 'U-Net', 'Time Series', 'Failure Mode Analysis']
+            },
+            {
+              title: 'MLOps, Cloud & Observabilidad',
+              icon: 'cloud-cog',
+              accent: 'emerald',
+              items: ['MLflow', 'Docker', 'Kubernetes (Arquitectura)', 'AWS (EC2, S3, Lambda, Kinesis)', 'Terraform', 'GitHub Actions (CI/CD)', 'Evidently AI', 'Prometheus & Grafana', 'Virtual Machines', 'GitHub Codespaces', 'Bash/Linux']
+            },
+            {
+              title: 'Backend Python & Ingeniería de Datos',
+              icon: 'server',
+              accent: 'violet',
+              items: ['Python (POO, SOLID, Typing)', 'FastAPI & Flask', 'Nginx', 'SQL (JOINs, CTEs, Window Functions)', 'Pandas & NumPy', 'ETL/ELT Pipelines', 'Data Contracts (jsonschema)', 'pytest / unittest / Mocks']
+            },
+            {
+              title: 'IA Generativa & Flujos Agénticos',
+              icon: 'sparkles',
+              accent: 'cyan',
+              items: ['LLMs', 'Despliegue Local de LLMs', 'Model Context Protocol (MCP)', 'Claude Code', 'OpenClaw', 'API Hooks & Tooling']
+            }
+          ]
+        },
+        credentials: {
+          eyebrow: 'Trayectoria Internacional & Respaldo',
+          title: 'Credenciales y Señales de Confianza',
+          passeportBadge: 'Éligible Passeport Talent (Francia / UE — Sin permiso de trabajo requerido)',
+          items: [
+            {
+              badge: 'Educación Internacional',
+              icon: 'graduation-cap',
+              title: 'Doble Máster en Ingeniería (Francia)',
+              org: 'École Supérieure des Mines de Saint-Étienne (EMSE)',
+              detail: 'Máster en Ingeniería en Energías y Transición Energética + MSc. en Gestión Ambiental y de Riesgos (Mines Saint-Étienne, Lyon 2, Lyon 3, ENTPE) + Ingeniería Mecánica (UTP).'
+            },
+            {
+              badge: 'Docencia & Liderazgo Técnico',
+              icon: 'youtube',
+              title: 'Profesor Universitario de Python',
+              org: 'Universidad Tecnológica de Pereira (UTP)',
+              detail: 'Diseño curricular de programación aplicada (estructuras de datos, algoritmos, POO, APIs, NumPy y Pandas) y creador de una biblioteca de tutoriales guiados en YouTube.'
+            },
+            {
+              badge: 'Industria Europea',
+              icon: 'building-2',
+              title: 'Ingeniería Analítica y Automatización',
+              org: 'Groupe Aéroports de Paris (ADP) & AMVALOR',
+              detail: 'Modelado cuantitativo de datos, evaluación estadística de KPIs y dashboards automatizados en proyectos de gran escala en París y Chambéry (Arts & Métiers-ParisTech).'
+            },
+            {
+              badge: 'Certificaciones Verificadas',
+              icon: 'badge-check',
+              title: 'Especialización ML & Deep Learning',
+              org: 'Stanford Online / Coursera · IBM · Big School',
+              detail: 'Andrew Ng — Machine Learning & Deep Learning Specialization (ID: QAUCGXSB4R1P), IBM Cognitive Class (Mastering PyTorch) y Big School & Mouredev (Desarrollo con IA).'
+            }
+          ]
+        },
+        contact: {
+          eyebrow: 'Hablemos de tu Sistema de IA',
+          title: '¿Listo para llevar tu modelo a producción?',
+          subtitle: 'Disponible para contratos en Upwork, Fiverr Pro y consultoría técnica directa B2B en Español, Inglés (B2) y Francés (C1).',
+          emailLabel: 'Correo Electrónico Directo',
+          copyEmail: 'Copiar Email',
+          phoneLabel: 'Teléfono / WhatsApp Internacional'
+        },
+        brief: {
+          title: 'Generador Rápido de Project Brief',
+          subtitle: 'Selecciona tu paquete y objetivo para crear un mensaje estructurado listo para Upwork, Fiverr o Email.',
+          selectPkg: '1. Selecciona el Paquete de Servicio',
+          nameLabel: '2. Tu Nombre / Empresa',
+          timelineLabel: '3. Horizonte Estimado',
+          goalLabel: '4. Describe brevemente tu proyecto o reto técnico',
+          goalPlaceholder: 'Ej. Tenemos un notebook en PyTorch y necesitamos pasarlo a Docker + API REST con tests...',
+          timelines: ['MVP Rápido (1–2 semanas)', 'Refactor a Producción (2–4 semanas)', 'Arquitectura MLOps Completa (1+ mes)'],
+          copyBtn: 'Copiar Brief',
+          sendBtn: 'Enviar por Email',
+          defaultName: '[Tu Nombre / Empresa]',
+          defaultGoal: 'Buscamos diseñar/desplegar una solución de ML confiable y lista para producción.'
+        },
+        footer: {
+          trilingual: 'ES Nativo · EN B2 · FR C1'
+        },
+        toasts: {
+          emailCopied: 'Correo copiado al portapapeles: juanmanuel.diaz@utp.edu.co',
+          briefCopied: '¡Project Brief copiado! Listo para pegar en Upwork, Fiverr o Email.',
+          pkgSelected: 'Paquete preseleccionado en el Project Brief.',
+          printReady: 'Abriendo vista optimizada de impresión / PDF...'
+        }
+      },
+      en: {
+        nav: {
+          projects: 'Projects',
+          services: 'Services',
+          skills: 'Tech Stack',
+          credentials: 'Credentials',
+          contact: 'Contact',
+          exportPdf: 'Export PDF',
+          hire: 'Hire Me'
+        },
+        hero: {
+          availability: 'Available for Freelance Projects · Upwork / Fiverr / B2B',
+          role: 'Juan Manuel Díaz · ML & MLOps Engineer · Computer Vision',
+          headlinePre: 'Taking Machine Learning Models',
+          headlineAccent: ' from Notebook to Production.',
+          subheadline: 'Double MSc. Engineering graduate from France (École des Mines de Saint-Étienne). I architect auditable, tested, and containerized Computer Vision systems, Python Backend services, and end-to-end MLOps pipelines.',
+          pillar1: 'OOP & SOLID',
+          pillar2: 'Data Contracts & Tests',
+          pillar3: 'Docker · MLflow · AWS',
+          ctaPrimary: 'Explore Case Studies',
+          ctaSecondary: 'View Freelance Packages',
+          pipelineHint: 'Click each stage',
+          stages: [
+            {
+              badge: 'STAGE 01 · EXPERIMENTATION',
+              title: 'Jupyter Notebook & EDA',
+              desc: 'Typical starting point for clients: monolithic research notebooks with coupled logic that fail when moved outside a local machine.',
+              tools: ['Python', 'Pandas', 'NumPy', 'EDA'],
+              impact: 'Failure-mode diagnostics and clean separation of concerns before refactoring.'
+            },
+            {
+              badge: 'STAGE 02 · DEFENSIVE VALIDATION',
+              title: 'JSON Schema Guard (Schema-First)',
+              desc: 'Strict data contracts powered by jsonschema auditing tensor shapes, channels, and data types prior to model training or inference.',
+              tools: ['jsonschema', 'configs/data_schema.py', 'YAML'],
+              impact: 'Intercepts corrupted or malformed files to prevent silent failures in production.'
+            },
+            {
+              badge: 'STAGE 03 · SOFTWARE ENGINEERING',
+              title: 'Modular OOP / SOLID Architecture',
+              desc: 'Decoupled architecture using abstract base classes (base_model.py), isolated dataloaders, unified CLI entrypoints (main.py), and mock-based unit test suites.',
+              tools: ['OOP/SOLID', 'pytest', 'unittest.mock (@patch)', 'YAML Logging'],
+              impact: 'Maintainable Python codebase that validates critical logic without memory bloat.'
+            },
+            {
+              badge: 'STAGE 04 · PACKAGING & SERVING',
+              title: 'Docker + FastAPI / Flask + AWS',
+              desc: 'Serving models through REST APIs, Nginx, and reproducible Docker containers—or scalable AWS Kinesis/Lambda streaming and offline batch pipelines.',
+              tools: ['Docker', 'FastAPI', 'Flask', 'Nginx', 'AWS'],
+              impact: 'Frictionless integration into production web, cloud, or industrial client apps.'
+            },
+            {
+              badge: 'STAGE 05 · MLOPS OBSERVABILITY',
+              title: 'MLflow, Drift Monitoring & CI/CD',
+              desc: 'Full experiment traceability and model registry with MLflow, live data-drift dashboards, and automated CI/CD + Infrastructure as Code.',
+              tools: ['MLflow', 'Evidently AI', 'Prometheus', 'Grafana', 'GitHub Actions', 'Terraform'],
+              impact: 'Continuous production visibility and reliable, repeatable model updates.'
+            }
+          ],
+          metrics: [
+            { value: 'End-to-End', label: 'Ingestion → Model → API → Monitoring', icon: 'workflow', color: 'text-cyanx' },
+            { value: '2× MSc.', label: 'École des Mines de Saint-Étienne, France', icon: 'graduation-cap', color: 'text-emeraldx' },
+            { value: '3 Languages', label: 'ES Native · EN B2 · FR C1', icon: 'languages', color: 'text-violetx' },
+            { value: 'SOLID + Tests', label: 'Production-grade Python code', icon: 'check-circle-2', color: 'text-cyanx' }
+          ]
+        },
+        projects: {
+          eyebrow: 'Case Studies · Proven Production Engineering',
+          title: 'Featured Production Projects',
+          subtitle: 'Click any project to inspect its step-by-step architecture diagram, browse the interactive VS Code-style repository tree, and review production guarantees.',
+          openBtn: 'Open Case Study',
+          viewRepo: 'View on GitHub',
+          viewDocs: 'Documentation',
+          filters: [
+            { id: 'all', label: 'All' },
+            { id: 'cv', label: 'Computer Vision' },
+            { id: 'pytorch', label: 'PyTorch' },
+            { id: 'tensorflow', label: 'TensorFlow' },
+            { id: 'mlops', label: 'MLOps & AWS' },
+            { id: 'docker', label: 'Docker' }
+          ]
+        },
+        modal: {
+          tabArch: 'Visual Architecture',
+          tabRepo: 'Repository Explorer',
+          tabGuarantees: 'Production Guarantees',
+          problemTitle: 'Business Problem',
+          solutionTitle: 'Engineering Solution',
+          pipelineTitle: 'Interactive Pipeline (Click each step)',
+          repoHint: 'Select any file in the tree to inspect its exact architectural role',
+          guaranteesTitle: 'Key Engineering Deliverables & Guarantees',
+          stackTitle: 'Production Tech Stack',
+          requestSimilar: 'Request Similar Architecture',
+          activeStepLabel: 'Stage Inspection'
+        },
+        services: {
+          eyebrow: 'Freelance Catalog · Upwork & Fiverr Pro',
+          title: 'Productized Services with Clear Deliverables',
+          subtitle: 'No throwaway notebooks. Every package includes clean modular code, technical documentation, reproducibility, and automated tests ready for your team.',
+          idealLabel: 'Ideal for:',
+          ctaBtn: 'Request Quote',
+          items: [
+            {
+              id: 'srv-cv-mvp',
+              badge: 'Core Specialty',
+              accent: 'cyan',
+              highlighted: false,
+              title: 'Custom Computer Vision & Deep Learning Models',
+              subtitle: 'Semantic segmentation (U-Net) and industrial or medical classification (CNNs).',
+              idealFor: 'AI startups, manufacturing QA inspection, medtech, and agrotech teams.',
+              deliverables: [
+                'Reproducible ingestion, normalization, and Data Augmentation pipeline',
+                'Custom neural architectures in PyTorch or TensorFlow (CNN / U-Net)',
+                'Quantitative metrics report and edge-case failure mode analysis',
+                'Clean, documented modular repository with training & inference scripts'
+              ],
+              techTags: ['PyTorch', 'TensorFlow', 'U-Net', 'CNNs', 'Computer Vision']
+            },
+            {
+              id: 'srv-notebook-to-prod',
+              badge: 'Most Requested',
+              accent: 'emerald',
+              highlighted: true,
+              title: 'Jupyter Notebook to Production Backend Service',
+              subtitle: 'Refactoring experimental research scripts into scalable, maintainable software.',
+              idealFor: 'Data teams whose local models break when integrated into live products.',
+              deliverables: [
+                'Object-Oriented architecture (abstract base classes & SOLID principles)',
+                'Pre-ingestion data contracts with jsonschema & structured YAML logging',
+                'Automated unit and integration test suites (unittest / pytest / mocks)',
+                'REST API exposure (FastAPI / Flask), Nginx & reproducible Docker container'
+              ],
+              techTags: ['Python', 'FastAPI', 'Flask', 'Docker', 'jsonschema', 'pytest']
+            },
+            {
+              id: 'srv-mlops-end2end',
+              badge: 'Scale & Reliability',
+              accent: 'violet',
+              highlighted: false,
+              title: 'MLOps Architecture, Cloud Deployment & Monitoring',
+              subtitle: 'End-to-end ML lifecycle automation, versioning, and live observability.',
+              idealFor: 'Organizations needing full model traceability and automated drift alerts.',
+              deliverables: [
+                'Centralized Experiment Tracking & Model Registry with MLflow',
+                'Pipeline orchestration and online (API / AWS Streaming) or batch deployment',
+                'Data drift & service monitoring dashboards (Evidently AI, Prometheus, Grafana)',
+                'CI/CD workflows with GitHub Actions, pre-commit hooks & Terraform IaC'
+              ],
+              techTags: ['MLflow', 'AWS', 'Evidently AI', 'Grafana', 'GitHub Actions', 'Terraform']
+            }
+          ]
+        },
+        skills: {
+          eyebrow: 'Architecture & Tooling',
+          title: 'Technical Skills Matrix',
+          subtitle: 'Combining quantitative Data Science rigor with Python backend engineering, containerization, AWS cloud deployments, and MLOps observability.',
+          categories: [
+            {
+              title: 'Machine Learning & Computer Vision',
+              icon: 'brain-circuit',
+              accent: 'cyan',
+              items: ['PyTorch', 'TensorFlow', 'Keras', 'Scikit-Learn', 'XGBoost', 'CNNs', 'U-Net', 'Time Series', 'Failure Mode Analysis']
+            },
+            {
+              title: 'MLOps, Cloud & Observability',
+              icon: 'cloud-cog',
+              accent: 'emerald',
+              items: ['MLflow', 'Docker', 'Kubernetes (Architecture)', 'AWS (EC2, S3, Lambda, Kinesis)', 'Terraform', 'GitHub Actions (CI/CD)', 'Evidently AI', 'Prometheus & Grafana', 'Virtual Machines', 'GitHub Codespaces', 'Bash/Linux']
+            },
+            {
+              title: 'Python Backend & Data Engineering',
+              icon: 'server',
+              accent: 'violet',
+              items: ['Python (OOP, SOLID, Typing)', 'FastAPI & Flask', 'Nginx', 'SQL (JOINs, CTEs, Window Functions)', 'Pandas & NumPy', 'ETL/ELT Pipelines', 'Data Contracts (jsonschema)', 'pytest / unittest / Mocks']
+            },
+            {
+              title: 'Generative AI & Agentic Workflows',
+              icon: 'sparkles',
+              accent: 'cyan',
+              items: ['LLMs', 'Local LLM Deployment', 'Model Context Protocol (MCP)', 'Claude Code', 'OpenClaw', 'API Hooks & Tooling']
+            }
+          ]
+        },
+        credentials: {
+          eyebrow: 'International Track Record & Trust',
+          title: 'Credentials & Trust Signals',
+          passeportBadge: 'Eligible for French Passeport Talent (EU / France — No Work Permit Required)',
+          items: [
+            {
+              badge: 'European Education',
+              icon: 'graduation-cap',
+              title: 'Double MSc. in Engineering (France)',
+              org: 'École Supérieure des Mines de Saint-Étienne (EMSE)',
+              detail: 'MSc. in Renewable Energies & Energy Transition + MSc. in Environmental & Risk Management (Mines Saint-Étienne, Lyon 2, Lyon 3, ENTPE) + B.S. Mechanical Engineering (UTP).'
+            },
+            {
+              badge: 'University Teaching',
+              icon: 'youtube',
+              title: 'University Professor — Python Programming',
+              org: 'Universidad Tecnológica de Pereira (UTP)',
+              detail: 'Designed and taught applied Python engineering curricula (data structures, algorithms, OOP, APIs, NumPy, Pandas) and authored a guided YouTube technical tutorial library.'
+            },
+            {
+              badge: 'European Industry',
+              icon: 'building-2',
+              title: 'Analytical Engineering & Automation',
+              org: 'Groupe Aéroports de Paris (ADP) & AMVALOR',
+              detail: 'Quantitative data modeling, statistical KPI frameworks, and automated reporting dashboards for large-scale infrastructure and ADEME projects in Paris & Chambéry.'
+            },
+            {
+              badge: 'Verified Certifications',
+              icon: 'badge-check',
+              title: 'ML & Deep Learning Specialization',
+              org: 'Stanford Online / Coursera · IBM · Big School',
+              detail: 'Andrew Ng — Machine Learning & Deep Learning Specialization (Cert ID: QAUCGXSB4R1P), IBM Cognitive Class (Mastering PyTorch), and Big School & Mouredev (AI Development).'
+            }
+          ]
+        },
+        contact: {
+          eyebrow: "Let's Discuss Your AI System",
+          title: 'Ready to move your model into production?',
+          subtitle: 'Available for Upwork, Fiverr Pro, and direct B2B technical consulting in English (B2), French (C1), and Spanish (Native).',
+          emailLabel: 'Direct Email Address',
+          copyEmail: 'Copy Email',
+          phoneLabel: 'International Phone / WhatsApp'
+        },
+        brief: {
+          title: 'Quick Project Brief Builder',
+          subtitle: 'Choose a package and describe your goal to generate a structured scope ready for Upwork, Fiverr, or Email.',
+          selectPkg: '1. Select Service Package',
+          nameLabel: '2. Your Name / Company',
+          timelineLabel: '3. Target Timeline',
+          goalLabel: '4. Briefly describe your project or technical challenge',
+          goalPlaceholder: 'e.g. We have a PyTorch notebook and need it refactored into Docker + REST API with unit tests...',
+          timelines: ['Rapid MVP (1–2 weeks)', 'Production Refactor (2–4 weeks)', 'Full MLOps Architecture (1+ month)'],
+          copyBtn: 'Copy Brief',
+          sendBtn: 'Send via Email',
+          defaultName: '[Your Name / Company]',
+          defaultGoal: 'Looking to design/deploy a reliable, production-ready Machine Learning system.'
+        },
+        footer: {
+          trilingual: 'ES Native · EN B2 · FR C1'
+        },
+        toasts: {
+          emailCopied: 'Email copied to clipboard: juanmanuel.diaz@utp.edu.co',
+          briefCopied: 'Project Brief copied! Ready to paste on Upwork, Fiverr, or Email.',
+          pkgSelected: 'Service package pre-selected in the Project Brief builder.',
+          printReady: 'Opening clean print / PDF export view...'
+        }
+      }
+    };
+
+    /**
+     * 3 Flagship Projects Data (Shared structural & bilingual content)
+     */
+    const PROJECTS_DATA = [
+      {
+        id: 'proj-unet-segmentation',
+        serviceId: 'srv-notebook-to-prod',
+        filters: ['all', 'cv', 'tensorflow', 'pytorch', 'docker'],
+        githubUrl: 'https://github.com/AIbackbone/UNet-Image-Segmentation-End-to-End-MLProject',
+        docsUrl: null,
+        shortLabel: '01 · Production Computer Vision',
+        category: {
+          es: 'Visión por Computador & ML Backend',
+          en: 'Computer Vision & ML Backend'
+        },
+        title: {
+          es: 'Proyecto de aprendizaje automático de extremo a extremo para la segmentación de imágenes con UNet',
+          en: 'Proyecto de aprendizaje automático de extremo a extremo para la segmentación de imágenes con UNet'
+        },
+        enSubtitle: 'End-to-End UNet Image Segmentation Production Application',
+        summary: {
+          es: 'Aplicación modular end-to-end para segmentación semántica con arquitectura U-Net (Encoder-Decoder), diseñada bajo principios SOLID, abstracción multi-framework (TF/PyTorch), contratos JSON Schema y pruebas con mocks.',
+          en: 'Modular end-to-end semantic image segmentation backend powered by a symmetric U-Net (Encoder-Decoder), engineered with SOLID principles, TF/PyTorch OOP abstraction, JSON Schema contracts, and mock-based unit tests.'
+        },
+        businessProblem: {
+          es: 'Los modelos de segmentación suelen quedar atrapados en notebooks monolíticos sin validación de entradas ni pruebas automatizadas, causando fallos silenciosos cuando llegan imágenes corruptas o dimensiones inesperadas.',
+          en: 'Segmentation models are often trapped inside fragile monolithic notebooks lacking input validation or tests, leading to silent crashes whenever corrupted images or unexpected tensor dimensions arrive in production.'
+        },
+        engineeringSolution: {
+          es: 'Refactoricé el flujo completo en una arquitectura Python desacoplada por responsabilidades (configs, dataloader, model, executor, evaluation, ops, utils) con clase base abstracta compatible con TensorFlow y PyTorch, validación preventiva jsonschema y punto CLI único (main.py).',
+          en: 'Refactored the entire workflow into a decoupled Python architecture (configs, dataloader, model, executor, evaluation, ops, utils) featuring an abstract base class supporting both TensorFlow and PyTorch, defensive jsonschema validation, and a unified CLI entrypoint (main.py).'
+        },
+        architectureSteps: [
+          {
+            step: { es: '1. Data Guard', en: '1. Data Guard' },
+            tag: 'configs/data_schema.py',
+            detail: {
+              es: 'Contratos JSON Schema (jsonschema) auditan dimensiones, canales RGB/mask y tipos de datos antes de tocar el pipeline.',
+              en: 'JSON Schema contracts (jsonschema) audit tensor dimensions, channels, and data types before touching the ML pipeline.'
+            }
+          },
+          {
+            step: { es: '2. Dataloader', en: '2. Dataloader' },
+            tag: 'dataloader/dataloader.py',
+            detail: {
+              es: 'Ingesta estructurada, normalización de píxeles, imputación y batching eficiente preparado para entrenamiento e inferencia.',
+              en: 'Structured ingestion, pixel normalization, imputation, and efficient batching ready for training and inference.'
+            }
+          },
+          {
+            step: { es: '3. U-Net OOP', en: '3. U-Net OOP' },
+            tag: 'model/base_model.py',
+            detail: {
+              es: 'Clase base abstracta bajo principios SOLID que desacopla implementaciones intercambiables en TensorFlow (unet.py) y PyTorch (unet_pytorch.py).',
+              en: 'SOLID abstract base class decoupling interchangeable U-Net encoder-decoder implementations in TensorFlow (unet.py) and PyTorch (unet_pytorch.py).'
+            }
+          },
+          {
+            step: { es: '4. QA & Logging', en: '4. QA & Logging' },
+            tag: 'model/tests/unet_test.py',
+            detail: {
+              es: 'Suite de pruebas unitarias (unittest, tf.test, unittest.mock @patch) + trazabilidad YAML (logging_config.yaml) sin sobrecargar RAM.',
+              en: 'Unit test suite (unittest, tf.test, unittest.mock @patch) + structured YAML logging (logging_config.yaml) validating logic without heavy dataset loads.'
+            }
+          },
+          {
+            step: { es: '5. Serving', en: '5. Serving' },
+            tag: 'Flask · Nginx · Docker · K8s',
+            detail: {
+              es: 'Empaquetado orientado a despliegue en servicio API REST (Flask + Nginx), contenedores Docker y arquitectura lista para Kubernetes.',
+              en: 'Packaged for production serving via REST API (Flask + Nginx), reproducible Docker containers, and Kubernetes-ready architecture.'
+            }
+          }
+        ],
+        highlights: {
+          es: [
+            'Diseño Multi-Framework con POO: Clase base abstracta (base_model.py) que soporta implementaciones limpias en TensorFlow (unet.py) y PyTorch (unet_pytorch.py).',
+            'Calidad de Datos Schema-First: Validación defensiva pre-ingesta mediante jsonschema para bloquear archivos malformados antes del cómputo.',
+            'Testing Sin Sobrecarga: Pruebas unitarias en model/tests/unet_test.py empleando unittest.mock (@patch) para simular datasets pesados en milisegundos.',
+            'Stack de Producción Completo: Configuración centralizada, logging YAML, Flask API, Nginx, Docker y arquitectura orientada a Kubernetes.'
+          ],
+          en: [
+            'Multi-Framework OOP Design: Abstract base class (base_model.py) supporting clean, interchangeable TensorFlow (unet.py) and PyTorch (unet_pytorch.py) implementations.',
+            'Schema-First Data Quality: Defensive pre-ingestion validation with jsonschema blocking malformed inputs before GPU/CPU compute.',
+            'Resource-Efficient Testing: Unit test suite in model/tests/unet_test.py using unittest.mock (@patch) to mock heavy dataset loads for rapid CI execution.',
+            'Full Production Stack: Centralized configs, YAML logging, Flask API, Nginx, Docker containerization, and Kubernetes-ready structure.'
+          ]
+        },
+        techStack: ['Python', 'TensorFlow', 'PyTorch', 'U-Net', 'jsonschema', 'unittest / @patch', 'Flask', 'Nginx', 'Docker', 'Kubernetes'],
+        repoTree: [
+          {
+            path: 'main.py',
+            type: 'file',
+            badge: 'CLI Entrypoint',
+            role: {
+              es: 'Punto de entrada único CLI que orquesta configuración, inicialización del dataloader, entrenamiento y evaluación modular.',
+              en: 'Unified CLI entrypoint orchestrating configuration loading, dataloader setup, modular training, and evaluation.'
+            },
+            snippet: `# main.py — Unified Production CLI Entrypoint\nfrom configs.config import CFG\nfrom model.unet import UNet\nfrom utils.logger import get_logger\n\nlogger = get_logger(__name__)\n\ndef run():\n    logger.info("Initializing UNet End-to-End Pipeline...")\n    model = UNet(CFG)\n    model.load_data()\n    model.build()\n    model.train()\n    model.evaluate()`
+          },
+          {
+            path: 'configs/data_schema.py',
+            type: 'file',
+            badge: 'Data Contract',
+            role: {
+              es: 'Define el contrato de datos Schema-First con jsonschema para validar estructura, dimensiones y tipos antes de la ingesta.',
+              en: 'Defines the Schema-First data contract via jsonschema to validate structure, dimensions, and types before ingestion.'
+            },
+            snippet: `# configs/data_schema.py — Defensive Data Validation\nfrom jsonschema import validate\n\nINPUT_IMAGE_SCHEMA = {\n    "type": "object",\n    "properties": {\n        "image_size": {"type": "integer", "minimum": 64},\n        "channels": {"type": "integer", "enum": [1, 3]},\n        "batch_size": {"type": "integer", "minimum": 1}\n    },\n    "required": ["image_size", "channels", "batch_size"]\n}`
+          },
+          {
+            path: 'configs/logging_config.yaml',
+            type: 'file',
+            badge: 'Observability',
+            role: {
+              es: 'Configuración declarativa en YAML para handlers de consola y archivo, garantizando trazabilidad auditable de cada ejecución.',
+              en: 'Declarative YAML configuration for console and rotating file handlers ensuring auditable runtime logs.'
+            },
+            snippet: `# configs/logging_config.yaml\nversion: 1\nformatters:\n  structured:\n    format: "%(asctime)s | %(levelname)s | %(name)s | %(message)s"\nhandlers:\n  console:\n    class: logging.StreamHandler\n    formatter: structured\n    level: INFO`
+          },
+          {
+            path: 'dataloader/dataloader.py',
+            type: 'file',
+            badge: 'ETL / Ingestion',
+            role: {
+              es: 'Gestiona la carga, normalización de píxeles, imputación y preparación de tensores de imágenes y máscaras de segmentación.',
+              en: 'Handles loading, pixel normalization, imputation, and tensor preparation for input images and segmentation masks.'
+            },
+            snippet: `# dataloader/dataloader.py\nclass DataLoader:\n    @staticmethod\n    def load_data(data_config):\n        # Validates schema -> normalizes [0, 1] -> builds batched tf.data pipeline\n        return train_dataset, test_dataset`
+          },
+          {
+            path: 'model/base_model.py',
+            type: 'file',
+            badge: 'OOP / SOLID',
+            role: {
+              es: 'Clase base abstracta (ABC) que impone una interfaz estricta (load_data, build, train, evaluate) desacoplando el framework.',
+              en: 'Abstract Base Class (ABC) enforcing a strict interface (load_data, build, train, evaluate) to keep frameworks interchangeable.'
+            },
+            snippet: `# model/base_model.py — SOLID Interface Contract\nfrom abc import ABC, abstractmethod\n\nclass BaseModel(ABC):\n    def __init__(self, cfg):\n        self.config = Config.from_json(cfg)\n\n    @abstractmethod\n    def load_data(self): pass\n    @abstractmethod\n    def build(self): pass\n    @abstractmethod\n    def train(self): pass`
+          },
+          {
+            path: 'model/unet.py',
+            type: 'file',
+            badge: 'TensorFlow',
+            role: {
+              es: 'Implementación simétrica Encoder-Decoder U-Net en TensorFlow/Keras con skip connections y compilación parametrizada.',
+              en: 'Symmetric TensorFlow/Keras U-Net Encoder-Decoder implementation featuring skip connections and parameterized training.'
+            },
+            snippet: `# model/unet.py — TensorFlow U-Net Implementation\nclass UNet(BaseModel):\n    def build(self):\n        # Symmetric Convolutional Encoder + Bottleneck + Upsampling Decoder\n        # Skip connections preserve high-resolution spatial features\n        self.model = self._build_unet_graph()`
+          },
+          {
+            path: 'model/unet_pytorch.py',
+            type: 'file',
+            badge: 'PyTorch',
+            role: {
+              es: 'Implementación paralela de la arquitectura U-Net en PyTorch heredando del mismo diseño modular limpio.',
+              en: 'Parallel PyTorch U-Net architecture implementation following the same clean, modular OOP design.'
+            },
+            snippet: `# model/unet_pytorch.py — PyTorch U-Net Module\nimport torch.nn as nn\n\nclass UNetPyTorch(nn.Module):\n    def __init__(self, in_channels=3, out_channels=3):\n        super().__init__()\n        # DoubleConv encoder blocks + ConvTranspose2d decoder skip-concat`
+          },
+          {
+            path: 'model/tests/unet_test.py',
+            type: 'file',
+            badge: 'Unit Tests & Mocks',
+            role: {
+              es: 'Pruebas automatizadas con unittest, tf.test y unittest.mock (@patch) que simulan datasets pesados para validar arquitectura y normalización.',
+              en: 'Automated tests with unittest, tf.test, and unittest.mock (@patch) mocking heavy datasets to verify architecture and normalization fast.'
+            },
+            snippet: `# model/tests/unet_test.py\nfrom unittest.mock import patch\nimport tensorflow as tf\n\nclass UNetTest(tf.test.TestCase):\n    @patch("dataloader.dataloader.DataLoader.load_data")\n    def test_normalization_and_output_shape(self, mock_load):\n        mock_load.return_value = (dummy_images, dummy_masks)\n        # Fast validation without downloading gigabytes of images\n        self.assertEqual(output.shape[-1], expected_classes)`
+          },
+          {
+            path: 'executor/unet_trainer.py',
+            type: 'file',
+            badge: 'Trainer',
+            role: {
+              es: 'Aísla el bucle de ejecución, callbacks, checkpoints y registro de métricas fuera de la definición de la arquitectura.',
+              en: 'Isolates the execution loop, callbacks, checkpoints, and metric logging away from model graph definition.'
+            },
+            snippet: `# executor/unet_trainer.py\nclass UNetTrainer:\n    def __init__(self, model, dataset, epochs, optimizer):\n        self.model = model\n        self.dataset = dataset\n    def train_step(self, batch):\n        # Gradient tape / backpropagation & structured metric logging`
+          }
+        ]
+      },
+      {
+        id: 'proj-cv-emse',
+        serviceId: 'srv-cv-mvp',
+        filters: ['all', 'cv', 'pytorch'],
+        githubUrl: 'https://github.com/AIbackbone/Computer-Vision-EMSE-2023',
+        docsUrl: null,
+        shortLabel: '02 · Deep Learning (PyTorch)',
+        category: {
+          es: 'Deep Learning & Visión por Computador',
+          en: 'Deep Learning & Computer Vision'
+        },
+        title: {
+          es: 'Desarrolle de modelos de aprendizaje profundo para la clasificación de imágenes industriales y médicas',
+          en: 'Desarrolle de modelos de aprendizaje profundo para la clasificación de imágenes industriales y médicas'
+        },
+        enSubtitle: 'PyTorch CNNs for Industrial Edge-Defect Detection & Medical Diagnosis',
+        summary: {
+          es: 'Diseño, entrenamiento y evaluación desde cero de Redes Neuronales Convolucionales (CNNs) en PyTorch aplicadas a detección de defectos críticos en manufactura industrial y diagnóstico médico de precisión.',
+          en: 'From-scratch design, training, and evaluation of PyTorch Convolutional Neural Networks (CNNs) applied to critical industrial edge-defect detection and precision medical skin-disease diagnosis.'
+        },
+        businessProblem: {
+          es: 'La inspección visual manual en líneas de manufactura y el cribado clínico inicial sufren fatiga humana, baja escalabilidad y alta variabilidad frente a micro-defectos de borde o cambios de iluminación.',
+          en: 'Manual visual inspection on manufacturing lines and initial clinical screening suffer from human fatigue, poor scalability, and high variance on subtle edge defects or lighting shifts.'
+        },
+        engineeringSolution: {
+          es: 'Construí pipelines de clasificación de imágenes en PyTorch desde cero: curación estratificada, Data Augmentation dirigido, bloques convolucionales con BatchNorm/Dropout y diagnóstico riguroso de falsos negativos.',
+          en: 'Engineered PyTorch image classification pipelines from scratch: stratified curation, targeted Data Augmentation, custom convolutional blocks with BatchNorm/Dropout, and systematic failure-mode diagnostics.'
+        },
+        architectureSteps: [
+          {
+            step: { es: '1. Curación', en: '1. Curation' },
+            tag: 'data/stratified_split',
+            detail: {
+              es: 'Limpieza de artefactos, verificación de integridad y particionamiento estratificado Train / Validation / Test sin fuga de datos.',
+              en: 'Artifact cleansing, integrity checks, and stratified Train / Validation / Test splitting preventing data leakage.'
+            }
+          },
+          {
+            step: { es: '2. Augmentation', en: '2. Augmentation' },
+            tag: 'transforms/augmentation',
+            detail: {
+              es: 'Rotaciones, flips, normalización de contraste y balanceo de clases minoritarias para robustez ante ruido real.',
+              en: 'Rotations, flips, contrast normalization, and minority-class balancing to strengthen generalization under real-world noise.'
+            }
+          },
+          {
+            step: { es: '3. CNN PyTorch', en: '3. PyTorch CNN' },
+            tag: 'models/cnn_blocks.py',
+            detail: {
+              es: 'Arquitectura CNN diseñada desde cero en PyTorch con capas Conv2D, BatchNorm, MaxPooling, Dropout y schedulers adaptativos.',
+              en: 'Custom PyTorch CNN architecture built from scratch with Conv2D, BatchNorm, MaxPooling, Dropout, and adaptive LR schedulers.'
+            }
+          },
+          {
+            step: { es: '4. Failure Modes', en: '4. Failure Modes' },
+            tag: 'evaluation/metrics.py',
+            detail: {
+              es: 'Evaluación de matriz de confusión, Precision/Recall/F1 e inspección visual de casos borde para minimizar falsos negativos críticos.',
+              en: 'Confusion matrix, Precision/Recall/F1 evaluation, and visual edge-case inspection to minimize critical false negatives.'
+            }
+          }
+        ],
+        highlights: {
+          es: [
+            'Control Granular en PyTorch: Construcción desde cero de arquitecturas CNN calibradas para alta sensibilidad en bordes y texturas finas.',
+            'Generalización ante Casos Borde: Estrategias de Data Augmentation y regularización diseñadas para datasets industriales y dermatológicos desbalanceados.',
+            'Enfoque en Confiabilidad Crítica: Diagnóstico sistemático de modos de fallo priorizando Recall en defectos críticos y precisión clínica.'
+          ],
+          en: [
+            'Granular PyTorch Control: From-scratch CNN architectures calibrated for sharp edge sensitivity and fine-grained texture features.',
+            'Edge-Case Generalization: Targeted Data Augmentation and regularization built for imbalanced industrial and dermatological imagery.',
+            'Mission-Critical Reliability: Systematic failure-mode diagnostics balancing Recall and Precision for manufacturing QA and clinical support.'
+          ]
+        },
+        techStack: ['Python', 'PyTorch', 'CNNs', 'Computer Vision', 'Data Augmentation', 'Model Evaluation', 'NumPy', 'Pandas', 'Matplotlib'],
+        repoTree: [
+          {
+            path: 'data/raw & processed/',
+            type: 'folder',
+            badge: 'Dataset Pipeline',
+            role: {
+              es: 'Organización reproducible de imágenes industriales y médicas con splits estratificados para evitar data leakage.',
+              en: 'Reproducible industrial and medical image dataset organization with stratified splits preventing data leakage.'
+            },
+            snippet: `# Stratified Split Strategy\n# - Train (70%): Augmented batches\n# - Val   (15%): Early stopping & LR scheduler tuning\n# - Test  (15%): Strictly unseen edge-case evaluation`
+          },
+          {
+            path: 'transforms/augmentation.py',
+            type: 'file',
+            badge: 'Torchvision',
+            role: {
+              es: 'Transformaciones geométricas y fotométricas que simulan variaciones reales de cámara, rotación e iluminación.',
+              en: 'Geometric and photometric transforms simulating real-world camera angles, rotation, and lighting shifts.'
+            },
+            snippet: `# transforms/augmentation.py\ntrain_transforms = transforms.Compose([\n    transforms.Resize((224, 224)),\n    transforms.RandomHorizontalFlip(p=0.5),\n    transforms.RandomRotation(degrees=15),\n    transforms.ColorJitter(brightness=0.15, contrast=0.15),\n    transforms.ToTensor(),\n    transforms.Normalize(mean=MEAN, std=STD)\n])`
+          },
+          {
+            path: 'models/cnn_blocks.py',
+            type: 'file',
+            badge: 'PyTorch nn.Module',
+            role: {
+              es: 'Definición modular de bloques convolucionales (Conv2D -> BatchNorm -> ReLU -> MaxPool) y clasificador con Dropout.',
+              en: 'Modular convolutional feature-extractor blocks (Conv2D -> BatchNorm -> ReLU -> MaxPool) and regularized Dropout classifier.'
+            },
+            snippet: `# models/cnn_blocks.py\nclass IndustrialMedicalCNN(nn.Module):\n    def __init__(self, num_classes):\n        super().__init__()\n        self.features = nn.Sequential(\n            nn.Conv2d(3, 32, kernel_size=3, padding=1),\n            nn.BatchNorm2d(32), nn.ReLU(), nn.MaxPool2d(2),\n            nn.Conv2d(32, 64, kernel_size=3, padding=1),\n            nn.BatchNorm2d(64), nn.ReLU(), nn.MaxPool2d(2)\n        )\n        self.classifier = nn.Sequential(nn.Dropout(0.4), nn.Linear(64*56*56, num_classes))`
+          },
+          {
+            path: 'training/train_loop.py',
+            type: 'file',
+            badge: 'Backpropagation',
+            role: {
+              es: 'Bucle explícito en PyTorch con control de dispositivo (CUDA/CPU), CrossEntropyLoss ponderada, LR scheduling y guardado del mejor checkpoint.',
+              en: 'Explicit PyTorch training loop with CUDA/CPU placement, weighted CrossEntropyLoss, LR scheduling, and best-checkpoint saving.'
+            },
+            snippet: `# training/train_loop.py\nfor epoch in range(epochs):\n    model.train()\n    for images, labels in train_loader:\n        optimizer.zero_grad()\n        loss = criterion(model(images.to(device)), labels.to(device))\n        loss.backward()\n        optimizer.step()`
+          },
+          {
+            path: 'evaluation/failure_analysis.py',
+            type: 'file',
+            badge: 'Diagnostics',
+            role: {
+              es: 'Generación de matrices de confusión, curvas Precision-Recall y extracción de muestras mal clasificadas para inspección de bordes.',
+              en: 'Confusion matrices, Precision-Recall curves, and misclassified edge-case extraction for deep error analysis.'
+            },
+            snippet: `# evaluation/failure_analysis.py\nreport = classification_report(y_true, y_pred, output_dict=True)\n# Audits critical false negatives in medical & defect classes\n# Logs worst-confidence edge cases for targeted retraining`
+          }
+        ]
+      },
+      {
+        id: 'proj-mlops-bootcamp',
+        serviceId: 'srv-mlops-end2end',
+        filters: ['all', 'mlops', 'docker'],
+        githubUrl: 'https://github.com/AIbackbone/MLOps-bootcamp',
+        docsUrl: 'https://datatalksclub.github.io/docs/courses/mlops-zoomcamp/',
+        shortLabel: '03 · MLOps & Cloud Infrastructure',
+        category: {
+          es: 'MLOps, Despliegue Cloud & Monitoreo',
+          en: 'MLOps, Cloud Deployment & Monitoring'
+        },
+        title: {
+          es: 'MLOps-Bootcamp: Pipeline de Operacionalización End-to-End (DataTalks.Club)',
+          en: 'MLOps-Bootcamp: Pipeline de Operacionalización End-to-End (DataTalks.Club)'
+        },
+        enSubtitle: 'End-to-End MLOps Lifecycle: MLflow, AWS Deployment, Drift Monitoring & CI/CD',
+        summary: {
+          es: 'Implementación integral del ciclo de vida MLOps en 6 módulos: Tracking con MLflow, orquestación, despliegue online/streaming/batch (Flask, AWS Kinesis & Lambda), monitoreo de drift (Evidently, Prometheus, Grafana) y CI/CD + Terraform.',
+          en: 'Comprehensive 6-stage MLOps lifecycle implementation covering MLflow tracking & registry, orchestration, online/streaming/batch deployment (Flask, AWS Kinesis & Lambda), drift monitoring (Evidently, Prometheus, Grafana), and CI/CD + Terraform.'
+        },
+        businessProblem: {
+          es: 'Sin versionado de modelos, orquestación automatizada ni monitoreo de deriva de datos (data drift), los modelos en producción se degradan silenciosamente y cada actualización implica alto riesgo operativo.',
+          en: 'Without model versioning, automated orchestration, or live data-drift monitoring, production ML models silently degrade and every deployment becomes a risky, manual bottleneck.'
+        },
+        engineeringSolution: {
+          es: 'Estructuré un ecosistema MLOps completo sobre el dataset NY Taxi y un proyecto final integrador: MLflow Registry, pipelines orquestados, inferencia web/streaming/batch en AWS, observabilidad con Evidently/Grafana e IaC con Terraform.',
+          en: 'Built a full MLOps ecosystem using the NY Taxi dataset and an end-to-end capstone integrating MLflow Registry, orchestrated pipelines, AWS web/streaming/batch inference, Evidently/Grafana observability, and Terraform IaC.'
+        },
+        architectureSteps: [
+          {
+            step: { es: '1. Tracking', en: '1. Tracking' },
+            tag: 'MLflow Registry',
+            detail: {
+              es: 'Seguimiento centralizado de hiperparámetros, artefactos, métricas y promoción de versiones (Staging -> Production) en MLflow.',
+              en: 'Centralized tracking of hyperparameters, artifacts, metrics, and version promotion (Staging -> Production) in MLflow.'
+            }
+          },
+          {
+            step: { es: '2. Orquestación', en: '2. Orchestration' },
+            tag: 'Prefect / Pipelines',
+            detail: {
+              es: 'Automatización de pipelines reproducibles de ingesta, feature engineering y reentrenamiento programado con reintentos.',
+              en: 'Automated reproducible pipelines for ingestion, feature engineering, and scheduled retraining with retries.'
+            }
+          },
+          {
+            step: { es: '3. Despliegue', en: '3. Deployment' },
+            tag: 'Flask · AWS Kinesis/Lambda',
+            detail: {
+              es: 'Tres patrones reales: Web Service online (Flask + Docker), Streaming en tiempo real (AWS Kinesis & Lambda) y Batch Scoring offline.',
+              en: 'Three real-world patterns: Online Web Service (Flask + Docker), Real-time Streaming (AWS Kinesis & Lambda), and Offline Batch Scoring.'
+            }
+          },
+          {
+            step: { es: '4. Monitoreo', en: '4. Monitoring' },
+            tag: 'Evidently · Prometheus · Grafana',
+            detail: {
+              es: 'Detección continua de data drift y latencia en web services (Prometheus/Grafana) y jobs batch (Prefect + MongoDB + Evidently AI).',
+              en: 'Continuous data-drift and latency monitoring for web services (Prometheus/Grafana) and batch jobs (Prefect + MongoDB + Evidently AI).'
+            }
+          },
+          {
+            step: { es: '5. CI/CD & IaC', en: '5. CI/CD & IaC' },
+            tag: 'Pytest · Actions · Terraform',
+            detail: {
+              es: 'Pruebas unitarias/integración con Pytest & LocalStack, pre-commit hooks, GitHub Actions CI/CD e Infraestructura como Código con Terraform.',
+              en: 'Unit/integration testing with Pytest & LocalStack, pre-commit hooks, GitHub Actions CI/CD, and Terraform Infrastructure as Code.'
+            }
+          }
+        ],
+        highlights: {
+          es: [
+            'Gestión del Ciclo de Vida con MLflow: Registro centralizado de experimentos, artefactos y promoción auditable de modelos.',
+            'Despliegue Multi-Patrón en Cloud: Servicio web Dockerizado (Flask), streaming serverless (AWS Kinesis & Lambda) y procesamiento batch offline.',
+            'Observabilidad y Data Drift: Monitoreo de servicios web con Prometheus, Evidently AI y Grafana; jobs batch con Prefect, MongoDB y Evidently.',
+            'Ingeniería DevOps & IaC: Pytest + LocalStack, linting/pre-commit hooks, pipelines CI/CD en GitHub Actions y aprovisionamiento con Terraform.'
+          ],
+          en: [
+            'MLflow Lifecycle Management: Centralized experiment tracking, artifact logging, and auditable model registry promotion.',
+            'Multi-Pattern Cloud Deployment: Dockerized web service (Flask), serverless streaming (AWS Kinesis & Lambda), and offline batch scoring.',
+            'Observability & Data Drift: Live service monitoring with Prometheus, Evidently AI, and Grafana; batch monitoring with Prefect, MongoDB, and Evidently.',
+            'DevOps & IaC Best Practices: Pytest + LocalStack integration tests, linting/pre-commit hooks, GitHub Actions CI/CD, and Terraform IaC.'
+          ]
+        },
+        techStack: ['MLflow', 'Docker', 'AWS (Lambda, Kinesis, EC2, S3)', 'Flask', 'Evidently AI', 'Prometheus', 'Grafana', 'Prefect', 'MongoDB', 'Pytest', 'LocalStack', 'GitHub Actions', 'Terraform', 'Bash'],
+        repoTree: [
+          {
+            path: '01-intro/',
+            type: 'folder',
+            badge: 'Cloud & VMs',
+            role: {
+              es: 'Configuración de entorno Linux/VM, GitHub Codespaces, modelo base sobre NY Taxi dataset y matriz de madurez MLOps.',
+              en: 'Linux VM & GitHub Codespaces environment setup, NY Taxi baseline model, and MLOps maturity framework.'
+            },
+            snippet: `# 01-intro/ — Reproducible Cloud Dev Environment\n# Setup via Bash, Virtual Machines (EC2) & GitHub Codespaces\n# Baseline duration prediction model on NYC Green Taxi Parquet data`
+          },
+          {
+            path: '02-experiment-tracking/',
+            type: 'folder',
+            badge: 'MLflow',
+            role: {
+              es: 'Servidor de Tracking MLflow, registro automático de parámetros/métricas, comparación de modelos y Model Registry.',
+              en: 'MLflow Tracking Server, experiment logging, hyperparameter comparison, artifact store, and Model Registry.'
+            },
+            snippet: `# 02-experiment-tracking/train.py\nimport mlflow\n\nmlflow.set_tracking_uri("sqlite:///mlflow.db")\nmlflow.set_experiment("nyc-taxi-experiment")\nwith mlflow.start_run():\n    mlflow.log_params(params)\n    mlflow.log_metric("rmse", rmse)\n    mlflow.sklearn.log_model(model, artifact_path="models_mlflow")`
+          },
+          {
+            path: '03-orchestration/',
+            type: 'folder',
+            badge: 'Workflows',
+            role: {
+              es: 'Orquestación modular de pipelines ML para automatizar carga de datos, entrenamiento y registro con tolerancia a fallos.',
+              en: 'Modular ML workflow orchestration automating data ingestion, feature engineering, training, and registration.'
+            },
+            snippet: `# 03-orchestration/duration_pipeline.py\n@flow(name="taxi-duration-training")\ndef main_flow(train_path: str, val_path: str):\n    df_train = read_dataframe(train_path)\n    X_train, dv = create_features(df_train)\n    train_best_model(X_train, dv)`
+          },
+          {
+            path: '04-deployment/',
+            type: 'folder',
+            badge: 'Flask · AWS',
+            role: {
+              es: 'Tres arquitecturas de serving: Web Service (Flask + Docker), Streaming (AWS Kinesis + Lambda) y Batch Scoring offline.',
+              en: 'Three serving architectures: Web Service (Flask + Docker), Streaming (AWS Kinesis + Lambda), and Offline Batch Scoring.'
+            },
+            snippet: `# 04-deployment/streaming/lambda_function.py\ndef lambda_handler(event, context):\n    predictions = []\n    for record in event["Records"]:\n        features = prepare_features(decode_kinesis(record))\n        pred = model.predict(features)\n        predictions.append({"prediction": float(pred)})\n    return {"predictions": predictions}`
+          },
+          {
+            path: '05-monitoring/',
+            type: 'folder',
+            badge: 'Evidently · Grafana',
+            role: {
+              es: 'Observabilidad en producción: monitoreo de drift y métricas con Evidently AI, Prometheus, Grafana, Prefect y MongoDB.',
+              en: 'Production observability: live drift detection and metrics via Evidently AI, Prometheus, Grafana, Prefect, and MongoDB.'
+            },
+            snippet: `# 05-monitoring/evidently_metrics.py\nreport = Report(metrics=[\n    ColumnDriftMetric(column_name="prediction"),\n    DatasetDriftMetric(),\n    DatasetMissingValuesMetric()\n])\nreport.run(reference_data=ref_df, current_data=curr_df)`
+          },
+          {
+            path: '06-best-practices/',
+            type: 'folder',
+            badge: 'CI/CD · Terraform',
+            role: {
+              es: 'Pruebas unitarias y de integración (Pytest + LocalStack), linting, pre-commit hooks, GitHub Actions y Terraform IaC.',
+              en: 'Unit & integration tests (Pytest + LocalStack), linting, pre-commit hooks, GitHub Actions CI/CD, and Terraform IaC.'
+            },
+            snippet: `# 06-best-practices/.github/workflows/ci-tests.yml\njobs:\n  test-and-lint:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: pytest tests/unit\n      - run: docker compose -f integration-test/docker-compose.yaml up --abort-on-container-exit`
+          }
+        ]
+      }
+    ];
+
+    /* =====================================================================
+       APPLICATION RUNTIME STATE
+       ===================================================================== */
+    const state = {
+      lang: 'es',
+      activeHeroStage: 1,
+      activeFilter: 'all',
+      activeModalProjectId: null,
+      activeModalTab: 'arch',
+      activeArchStepIdx: 0,
+      activeRepoFileIdx: 0,
+      selectedBriefServiceId: 'srv-notebook-to-prod'
+    };
+
+    /* =====================================================================
+       CUSTOM TECHNICAL SVG ILLUSTRATIONS FOR EACH PROJECT CARD
+       ===================================================================== */
+    function getProjectCardSVG(projectId) {
+      if (projectId === 'proj-unet-segmentation') {
+        // Symmetric U-Net Encoder-Decoder with Skip Connections & JSON Schema Shield
+        return `
+          <svg viewBox="0 0 420 175" class="w-full h-auto" role="img" aria-label="UNet Encoder-Decoder Architecture Illustration">
+            <rect width="420" height="175" rx="12" fill="#0B1120" />
+            <!-- Subtle Grid -->
+            <g stroke="#1E293B" stroke-width="0.6" opacity="0.55">
+              <line x1="0" y1="44" x2="420" y2="44" />
+              <line x1="0" y1="88" x2="420" y2="88" />
+              <line x1="0" y1="132" x2="420" y2="132" />
+            </g>
+
+            <!-- Input Image + JSON Schema Guard -->
+            <rect x="14" y="42" width="44" height="44" rx="7" fill="#131C31" stroke="#06B6D4" stroke-width="1.4" />
+            <circle cx="30" cy="60" r="8" fill="#06B6D4" fill-opacity="0.35" />
+            <rect x="33" y="62" width="16" height="14" rx="2" fill="#8B5CF6" fill-opacity="0.45" />
+            <text x="15" y="101" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="7.5">INPUT</text>
+            <rect x="14" y="110" width="52" height="18" rx="4" fill="#06B6D4" fill-opacity="0.14" stroke="#06B6D4" stroke-width="0.9" />
+            <text x="19" y="122" fill="#67E8F9" font-family="JetBrains Mono, monospace" font-size="7">jsonschema</text>
+
+            <!-- Encoder Downsampling Blocks (Left side of U) -->
+            <rect x="86" y="34" width="22" height="58" rx="4" fill="#06B6D4" fill-opacity="0.85" />
+            <rect x="122" y="54" width="22" height="48" rx="4" fill="#06B6D4" fill-opacity="0.65" />
+            <rect x="158" y="78" width="22" height="40" rx="4" fill="#06B6D4" fill-opacity="0.48" />
+
+            <!-- Bottleneck (Center Bottom) -->
+            <rect x="194" y="106" width="32" height="30" rx="5" fill="#8B5CF6" fill-opacity="0.85" stroke="#C4B5FD" stroke-width="1" />
+            <text x="198" y="150" fill="#A78BFA" font-family="JetBrains Mono, monospace" font-size="7.5">LATENT</text>
+
+            <!-- Decoder Upsampling Blocks (Right side of U) -->
+            <rect x="240" y="78" width="22" height="40" rx="4" fill="#10B981" fill-opacity="0.52" />
+            <rect x="276" y="54" width="22" height="48" rx="4" fill="#10B981" fill-opacity="0.70" />
+            <rect x="312" y="34" width="22" height="58" rx="4" fill="#10B981" fill-opacity="0.90" />
+
+            <!-- Skip Connections (Animated Glowing Dashes) -->
+            <line x1="108" y1="48" x2="312" y2="48" stroke="#67E8F9" stroke-width="1.3" class="svg-flow-line" />
+            <line x1="144" y1="68" x2="276" y2="68" stroke="#67E8F9" stroke-width="1.3" class="svg-flow-line" />
+            <line x1="180" y1="92" x2="240" y2="92" stroke="#A78BFA" stroke-width="1.3" class="svg-flow-line" />
+            <text x="172" y="42" fill="#67E8F9" font-family="JetBrains Mono, monospace" font-size="7.5">SKIP CONNECTIONS</text>
+
+            <!-- Flow Arrow Input -> Encoder & Decoder -> Output -->
+            <path d="M 58 64 L 84 64" stroke="#06B6D4" stroke-width="1.5" />
+            <path d="M 334 64 L 358 64" stroke="#10B981" stroke-width="1.5" />
+
+            <!-- Output Segmentation Mask -->
+            <rect x="360" y="42" width="44" height="44" rx="7" fill="#131C31" stroke="#10B981" stroke-width="1.6" />
+            <circle cx="376" cy="60" r="8" fill="#10B981" />
+            <rect x="379" y="62" width="16" height="14" rx="2" fill="#06B6D4" />
+            <text x="361" y="101" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="7.5">MASK</text>
+            <rect x="352" y="110" width="54" height="18" rx="4" fill="#10B981" fill-opacity="0.14" stroke="#10B981" stroke-width="0.9" />
+            <text x="357" y="122" fill="#6EE7B7" font-family="JetBrains Mono, monospace" font-size="7">TF/PyTorch</text>
+
+            <!-- Top Label -->
+            <text x="14" y="20" fill="#CBD5E1" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="600">U-NET SYMMETRIC ENCODER-DECODER</text>
+            <circle cx="398" cy="17" r="4" fill="#10B981" class="svg-pulse-ring" />
+          </svg>
+        `;
+      }
+
+      if (projectId === 'proj-cv-emse') {
+        // Split Visual: Industrial Edge-Defect Scanner + Medical Neural Heatmap (Grad-CAM)
+        return `
+          <svg viewBox="0 0 420 175" class="w-full h-auto" role="img" aria-label="Industrial Edge-Defect and Medical CNN Classification Illustration">
+            <rect width="420" height="175" rx="12" fill="#0B1120" />
+
+            <!-- LEFT PANEL: Industrial Edge-Defect Detection -->
+            <rect x="14" y="30" width="188" height="130" rx="9" fill="#131C31" stroke="#1E293B" stroke-width="1.2" />
+            <text x="24" y="46" fill="#06B6D4" font-family="JetBrains Mono, monospace" font-size="8" font-weight="600">INDUSTRIAL EDGE-DEFECT</text>
+            <!-- Surface Metallic Grid -->
+            <rect x="26" y="56" width="164" height="76" rx="5" fill="#0F172A" stroke="#334155" stroke-width="0.9" />
+            <path d="M 55 82 L 74 96 L 86 91 L 106 112" stroke="#F43F5E" stroke-width="2" fill="none" stroke-linecap="round" />
+            <!-- Detection Bounding Box -->
+            <rect x="48" y="74" width="66" height="46" rx="3" fill="#F43F5E" fill-opacity="0.12" stroke="#06B6D4" stroke-width="1.4" stroke-dasharray="4 3" />
+            <rect x="48" y="62" width="58" height="11" rx="2" fill="#06B6D4" />
+            <text x="51" y="70" fill="#0B1120" font-family="JetBrains Mono, monospace" font-size="6.8" font-weight="700">DEFECT 0.98</text>
+            <!-- Animated Laser Scan Line -->
+            <line x1="28" y1="58" x2="188" y2="58" stroke="#06B6D4" stroke-width="1.5" opacity="0.85" class="svg-scan-beam" />
+            <text x="26" y="148" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="7.5">Conv2D · Edge Sensitivity</text>
+
+            <!-- RIGHT PANEL: Medical Diagnostic Heatmap -->
+            <rect x="218" y="30" width="188" height="130" rx="9" fill="#131C31" stroke="#1E293B" stroke-width="1.2" />
+            <text x="228" y="46" fill="#A78BFA" font-family="JetBrains Mono, monospace" font-size="8" font-weight="600">MEDICAL DIAGNOSTIC CNN</text>
+            <rect x="230" y="56" width="164" height="76" rx="5" fill="#0F172A" stroke="#334155" stroke-width="0.9" />
+            <!-- Grad-CAM Activation Radial Glow -->
+            <defs>
+              <radialGradient id="gradCamHeat" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#10B981" stop-opacity="0.95" />
+                <stop offset="48%" stop-color="#8B5CF6" stop-opacity="0.55" />
+                <stop offset="100%" stop-color="#06B6D4" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+            <circle cx="312" cy="94" r="34" fill="url(#gradCamHeat)" class="svg-pulse-ring" />
+            <circle cx="312" cy="94" r="14" fill="none" stroke="#10B981" stroke-width="1.3" stroke-dasharray="3 2" />
+            <line x1="312" y1="68" x2="312" y2="120" stroke="#94A3B8" stroke-width="0.6" opacity="0.5" />
+            <line x1="280" y1="94" x2="344" y2="94" stroke="#94A3B8" stroke-width="0.6" opacity="0.5" />
+            <text x="230" y="148" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="7.5">PyTorch · Failure Diagnostics</text>
+
+            <!-- Top Label -->
+            <text x="14" y="19" fill="#CBD5E1" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="600">DUAL-DOMAIN COMPUTER VISION (PYTORCH)</text>
+          </svg>
+        `;
+      }
+
+      // Project 3: 6-Stage Circular MLOps Lifecycle Diagram
+      return `
+        <svg viewBox="0 0 420 175" class="w-full h-auto" role="img" aria-label="6-Stage MLOps Lifecycle Loop Illustration">
+          <rect width="420" height="175" rx="12" fill="#0B1120" />
+          <text x="14" y="19" fill="#CBD5E1" font-family="JetBrains Mono, monospace" font-size="8.5" font-weight="600">6-STAGE END-TO-END MLOPS LOOP</text>
+
+          <!-- Circular Orbit Ring -->
+          <ellipse cx="210" cy="96" rx="132" ry="52" fill="none" stroke="#1E293B" stroke-width="2.5" />
+          <ellipse cx="210" cy="96" rx="132" ry="52" fill="none" stroke="#06B6D4" stroke-width="1.6" class="svg-flow-line" />
+
+          <!-- Center MLOps Hub -->
+          <rect x="166" y="78" width="88" height="36" rx="10" fill="#131C31" stroke="#10B981" stroke-width="1.5" />
+          <text x="186" y="94" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="8" font-weight="700">MLOPS</text>
+          <text x="176" y="106" fill="#CBD5E1" font-family="JetBrains Mono, monospace" font-size="7">PROD ENGINE</text>
+
+          <!-- 6 Orbiting Nodes -->
+          <!-- 1. Cloud/VMs -->
+          <rect x="14" y="78" width="72" height="34" rx="7" fill="#131C31" stroke="#334155" stroke-width="1.2" />
+          <text x="23" y="92" fill="#06B6D4" font-family="JetBrains Mono, monospace" font-size="7.2" font-weight="700">01 ENV</text>
+          <text x="23" y="104" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="6.8">VMs · Docker</text>
+
+          <!-- 2. MLflow Tracking -->
+          <rect x="92" y="30" width="90" height="32" rx="7" fill="#131C31" stroke="#06B6D4" stroke-width="1.2" />
+          <text x="100" y="44" fill="#06B6D4" font-family="JetBrains Mono, monospace" font-size="7.2" font-weight="700">02 TRACKING</text>
+          <text x="100" y="55" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="6.8">MLflow Registry</text>
+
+          <!-- 3. Orchestration -->
+          <rect x="238" y="30" width="94" height="32" rx="7" fill="#131C31" stroke="#8B5CF6" stroke-width="1.2" />
+          <text x="246" y="44" fill="#A78BFA" font-family="JetBrains Mono, monospace" font-size="7.2" font-weight="700">03 PIPELINES</text>
+          <text x="246" y="55" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="6.8">Orchestration</text>
+
+          <!-- 4. Deployment -->
+          <rect x="334" y="78" width="74" height="34" rx="7" fill="#131C31" stroke="#10B981" stroke-width="1.2" />
+          <text x="342" y="92" fill="#10B981" font-family="JetBrains Mono, monospace" font-size="7.2" font-weight="700">04 DEPLOY</text>
+          <text x="342" y="104" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="6.8">Flask · AWS</text>
+
+          <!-- 5. Monitoring -->
+          <rect x="236" y="130" width="98" height="32" rx="7" fill="#131C31" stroke="#10B981" stroke-width="1.2" />
+          <text x="244" y="144" fill="#34D399" font-family="JetBrains Mono, monospace" font-size="7.2" font-weight="700">05 MONITOR</text>
+          <text x="244" y="155" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="6.8">Evidently · Grafana</text>
+
+          <!-- 6. CI/CD & Terraform -->
+          <rect x="88" y="130" width="98" height="32" rx="7" fill="#131C31" stroke="#8B5CF6" stroke-width="1.2" />
+          <text x="96" y="144" fill="#C4B5FD" font-family="JetBrains Mono, monospace" font-size="7.2" font-weight="700">06 CI/CD &amp; IaC</text>
+          <text x="96" y="155" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="6.8">Actions · Terraform</text>
+        </svg>
+      `;
+    }
+
+    /* =====================================================================
+       RENDER FUNCTIONS
+       ===================================================================== */
+
+    /**
+     * Translates all static data-i18n DOM nodes cleanly
+     */
+    function applyStaticTranslations() {
+      const dict = APP_DATA[state.lang];
+      document.documentElement.lang = state.lang;
+
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const keyPath = el.getAttribute('data-i18n').split('.');
+        let val = dict;
+        for (const k of keyPath) {
+          val = val ? val[k] : undefined;
+        }
+        if (typeof val === 'string') {
+          el.textContent = val;
+        }
+      });
+
+      // Update input placeholders
+      const goalInput = document.getElementById('brief-goal');
+      if (goalInput) {
+        goalInput.placeholder = dict.brief.goalPlaceholder;
+      }
+
+      // Toggle language buttons styling
+      const btnEs = document.getElementById('btn-lang-es');
+      const btnEn = document.getElementById('btn-lang-en');
+      if (state.lang === 'es') {
+        btnEs.className = 'rounded-lg px-2.5 py-1.5 font-semibold transition-all bg-cyanx text-navy-950';
+        btnEn.className = 'rounded-lg px-2.5 py-1.5 font-semibold transition-all text-slate-400 hover:text-slate-100';
+      } else {
+        btnEn.className = 'rounded-lg px-2.5 py-1.5 font-semibold transition-all bg-cyanx text-navy-950';
+        btnEs.className = 'rounded-lg px-2.5 py-1.5 font-semibold transition-all text-slate-400 hover:text-slate-100';
+      }
+    }
+
+    /**
+     * Renders the Hero Stage Inspector when a user clicks an SVG node
+     */
+    function renderHeroStageInspector() {
+      const stages = APP_DATA[state.lang].hero.stages;
+      const stage = stages[state.activeHeroStage] || stages[0];
+      const container = document.getElementById('hero-stage-inspector');
+      if (!container) return;
+
+      // Update SVG node active class
+      for (let i = 0; i < 5; i++) {
+        const node = document.getElementById(`hero-node-${i}`);
+        if (node) {
+          node.classList.toggle('active-node', i === state.activeHeroStage);
+        }
+      }
+
+      container.innerHTML = `
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <span class="font-mono text-[11px] font-semibold uppercase tracking-wider text-cyanx">${stage.badge}</span>
+          <div class="flex flex-wrap gap-1.5">
+            ${stage.tools.map((t) => `<span class="rounded-md bg-slate-800/90 px-2 py-0.5 font-mono text-[10px] text-slate-300 border border-slate-700/70">${t}</span>`).join('')}
+          </div>
+        </div>
+        <h3 class="mt-1.5 font-heading text-base font-bold text-slate-100">${stage.title}</h3>
+        <p class="mt-1 text-xs leading-relaxed text-slate-300 sm:text-sm">${stage.desc}</p>
+        <div class="mt-2.5 flex items-center gap-2 rounded-lg bg-emeraldx/10 border border-emeraldx/25 px-3 py-1.5 text-xs text-emerald-300">
+          <i data-lucide="zap" class="h-3.5 w-3.5 shrink-0 text-emeraldx"></i>
+          <span>${stage.impact}</span>
+        </div>
+      `;
+    }
+
+    function selectHeroStage(idx) {
+      state.activeHeroStage = idx;
+      renderHeroStageInspector();
+      refreshIcons();
+    }
+
+    /**
+     * Renders the 4-card Metrics Strip below Hero
+     */
+    function renderMetricsStrip() {
+      const metrics = APP_DATA[state.lang].hero.metrics;
+      const container = document.getElementById('metrics-strip');
+      if (!container) return;
+
+      container.innerHTML = metrics.map((m) => `
+        <div class="glass-card rounded-2xl p-4 sm:p-5 flex items-start gap-3.5">
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-800/90 border border-slate-700/80 ${m.color}">
+            <i data-lucide="${m.icon}" class="h-5 w-5"></i>
+          </div>
+          <div>
+            <div class="font-heading text-xl font-bold text-slate-50">${m.value}</div>
+            <div class="mt-0.5 text-xs text-slate-400 leading-snug">${m.label}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /**
+     * Renders Interactive Project Filter Pills
+     */
+    function renderFilterBar() {
+      const filters = APP_DATA[state.lang].projects.filters;
+      const container = document.getElementById('filter-bar');
+      if (!container) return;
+
+      container.innerHTML = filters.map((f) => {
+        const isActive = state.activeFilter === f.id;
+        const cls = isActive
+          ? 'bg-cyanx text-navy-950 border-cyanx shadow-glowCyan'
+          : 'bg-navy-850 text-slate-300 border-slate-700 hover:border-cyanx/60 hover:text-cyanx';
+        return `
+          <button type="button" onclick="setProjectFilter('${f.id}')" class="rounded-xl border px-3.5 py-2 font-mono text-xs font-semibold transition-all ${cls}">
+            ${f.label}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function setProjectFilter(filterId) {
+      state.activeFilter = filterId;
+      renderFilterBar();
+      renderProjectsGrid();
+      refreshIcons();
+    }
+
+    /**
+     * Renders the 3 Flagship Project Case Study Cards
+     */
+    function renderProjectsGrid() {
+      const container = document.getElementById('projects-grid');
+      const labels = APP_DATA[state.lang].projects;
+      if (!container) return;
+
+      const filtered = PROJECTS_DATA.filter((p) => p.filters.includes(state.activeFilter));
+
+      container.innerHTML = filtered.map((proj) => {
+        const subtitleBlock = state.lang === 'en'
+          ? `<p class="mt-1 font-mono text-[11px] text-cyanx/90">${proj.enSubtitle}</p>`
+          : '';
+
+        return `
+          <article class="glass-card glass-card-hover flex flex-col overflow-hidden rounded-2xl">
+            <!-- Custom SVG Technical Illustration -->
+            <div class="relative border-b border-slate-800/90 bg-navy-950/70 p-3 print-dark-svg cursor-pointer" onclick="openProjectModal('${proj.id}')">
+              ${getProjectCardSVG(proj.id)}
+            </div>
+
+            <!-- Card Body -->
+            <div class="flex flex-1 flex-col p-5 sm:p-6">
+              <div class="flex items-center justify-between gap-2">
+                <span class="rounded-lg bg-cyanx/10 border border-cyanx/30 px-2.5 py-0.5 font-mono text-[11px] font-semibold text-cyanx print-badge">${proj.shortLabel}</span>
+                <a href="${proj.githubUrl}" target="_blank" rel="noopener noreferrer" title="GitHub Repository" class="no-print text-slate-400 transition-colors hover:text-cyanx">
+                  <i data-lucide="external-link" class="h-4 w-4"></i>
+                </a>
+              </div>
+
+              <h3 class="mt-3 font-heading text-lg font-bold leading-snug text-slate-50 cursor-pointer hover:text-cyanx transition-colors" onclick="openProjectModal('${proj.id}')">
+                ${proj.title[state.lang]}
+              </h3>
+              ${subtitleBlock}
+
+              <p class="mt-3 text-sm leading-relaxed text-slate-300">
+                ${proj.summary[state.lang]}
+              </p>
+
+              <!-- Tech Stack Badges -->
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                ${proj.techStack.slice(0, 6).map((tech) => `
+                  <span class="rounded-lg border border-slate-700/80 bg-navy-950/80 px-2.5 py-1 font-mono text-[11px] text-slate-300 print-badge">${tech}</span>
+                `).join('')}
+                ${proj.techStack.length > 6 ? `<span class="rounded-lg border border-slate-800 bg-navy-950/60 px-2 py-1 font-mono text-[11px] text-cyanx">+${proj.techStack.length - 6}</span>` : ''}
+              </div>
+
+              <!-- Print-Only Condensed Key Highlights -->
+              <ul class="hidden print-only mt-3 list-disc pl-4 space-y-1 text-xs">
+                ${proj.highlights[state.lang].slice(0, 2).map((h) => `<li>${h}</li>`).join('')}
+              </ul>
+
+              <!-- Action Footer -->
+              <div class="mt-6 flex items-center gap-2.5 pt-4 border-t border-slate-800/80 mt-auto no-print">
+                <button type="button" onclick="openProjectModal('${proj.id}')" class="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-cyanx/15 border border-cyanx/40 px-4 py-2.5 text-xs font-semibold text-cyan-200 transition-all hover:bg-cyanx hover:text-navy-950">
+                  <i data-lucide="maximize-2" class="h-3.5 w-3.5"></i>
+                  <span>${labels.openBtn}</span>
+                </button>
+                <a href="${proj.githubUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-1.5 rounded-xl border border-slate-700 bg-navy-950/80 px-3.5 py-2.5 text-xs font-medium text-slate-300 transition-all hover:border-cyanx hover:text-cyanx">
+                  <i data-lucide="github" class="h-3.5 w-3.5"></i>
+                  <span>GitHub</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    /**
+     * Renders the 3 Productized Freelance Services Cards
+     */
+    function renderServicesGrid() {
+      const srv = APP_DATA[state.lang].services;
+      const container = document.getElementById('services-grid');
+      if (!container) return;
+
+      container.innerHTML = srv.items.map((item) => {
+        const isHL = item.highlighted;
+        const borderCls = isHL
+          ? 'border-emeraldx/60 shadow-glowEmerald ring-1 ring-emeraldx/30'
+          : 'border-slate-800';
+        const badgeCls = item.accent === 'emerald'
+          ? 'bg-emeraldx/15 text-emerald-300 border-emeraldx/40'
+          : item.accent === 'violet'
+            ? 'bg-violetx/15 text-violet-300 border-violetx/40'
+            : 'bg-cyanx/15 text-cyan-300 border-cyanx/40';
+        const btnCls = isHL
+          ? 'bg-gradient-to-r from-cyanx to-emeraldx text-navy-950 shadow-glowCyan hover:brightness-110'
+          : 'border border-slate-700 bg-navy-950/80 text-slate-100 hover:border-cyanx hover:text-cyanx';
+
+        return `
+          <div class="glass-card glass-card-hover relative flex flex-col rounded-2xl p-6 ${borderCls}">
+            <div class="flex items-center justify-between">
+              <span class="inline-flex items-center rounded-full border px-3 py-1 font-mono text-[11px] font-semibold print-badge ${badgeCls}">${item.badge}</span>
+              ${isHL ? `<i data-lucide="star" class="h-4 w-4 text-emeraldx fill-emeraldx/30"></i>` : ''}
+            </div>
+
+            <h3 class="mt-4 font-heading text-xl font-bold text-slate-50">${item.title}</h3>
+            <p class="mt-1.5 text-sm text-slate-400">${item.subtitle}</p>
+
+            <div class="mt-4 rounded-xl border border-slate-800 bg-navy-950/75 px-3.5 py-2.5 text-xs text-slate-300">
+              <span class="font-mono font-semibold text-cyanx">${srv.idealLabel}</span> ${item.idealFor}
+            </div>
+
+            <ul class="mt-5 space-y-2.5 flex-1">
+              ${item.deliverables.map((d) => `
+                <li class="flex items-start gap-2.5 text-sm text-slate-200">
+                  <i data-lucide="check-circle-2" class="mt-0.5 h-4 w-4 shrink-0 text-emeraldx"></i>
+                  <span>${d}</span>
+                </li>
+              `).join('')}
+            </ul>
+
+            <div class="mt-5 flex flex-wrap gap-1.5 pt-4 border-t border-slate-800/80">
+              ${item.techTags.map((t) => `<span class="rounded-md bg-slate-800/80 px-2 py-0.5 font-mono text-[11px] text-slate-300 print-badge">${t}</span>`).join('')}
+            </div>
+
+            <button type="button" onclick="selectServiceAndScroll('${item.id}')" class="no-print mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition-all ${btnCls}">
+              <span>${srv.ctaBtn}</span>
+              <i data-lucide="arrow-right" class="h-4 w-4"></i>
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /**
+     * Renders the 4-Category Technical Skills Matrix
+     */
+    function renderSkillsGrid() {
+      const categories = APP_DATA[state.lang].skills.categories;
+      const container = document.getElementById('skills-grid');
+      if (!container) return;
+
+      container.innerHTML = categories.map((cat) => {
+        const accentText = cat.accent === 'emerald' ? 'text-emeraldx' : cat.accent === 'violet' ? 'text-violetx' : 'text-cyanx';
+        return `
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex items-center gap-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-navy-950 border border-slate-800 ${accentText}">
+                <i data-lucide="${cat.icon}" class="h-5 w-5"></i>
+              </div>
+              <h3 class="font-heading text-lg font-bold text-slate-100">${cat.title}</h3>
+            </div>
+            <div class="mt-4 flex flex-wrap gap-2">
+              ${cat.items.map((skill) => `
+                <span class="rounded-xl border border-slate-700/80 bg-navy-950/90 px-3 py-1.5 font-mono text-xs text-slate-200 transition-colors hover:border-cyanx/60 hover:text-cyan-200 print-badge">
+                  ${skill}
+                </span>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /**
+     * Renders International Credibility & Trust Signals
+     */
+    function renderCredentialsGrid() {
+      const items = APP_DATA[state.lang].credentials.items;
+      const container = document.getElementById('credentials-grid');
+      if (!container) return;
+
+      container.innerHTML = items.map((c) => `
+        <div class="glass-card glass-card-hover rounded-2xl p-6">
+          <div class="flex items-start justify-between gap-3">
+            <span class="rounded-lg bg-cyanx/10 border border-cyanx/30 px-2.5 py-1 font-mono text-[11px] font-semibold text-cyanx print-badge">${c.badge}</span>
+            <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-navy-950 border border-slate-800 text-emeraldx">
+              <i data-lucide="${c.icon}" class="h-4 w-4"></i>
+            </div>
+          </div>
+          <h3 class="mt-3.5 font-heading text-lg font-bold text-slate-50">${c.title}</h3>
+          <p class="mt-0.5 font-mono text-xs font-medium text-cyanx">${c.org}</p>
+          <p class="mt-2.5 text-sm leading-relaxed text-slate-300">${c.detail}</p>
+        </div>
+      `).join('');
+    }
+
+    /* =====================================================================
+       INTERACTIVE CASE STUDY MODAL (3 TABS + VS CODE EXPLORER)
+       ===================================================================== */
+    function openProjectModal(projectId) {
+      state.activeModalProjectId = projectId;
+      state.activeModalTab = 'arch';
+      state.activeArchStepIdx = 0;
+      state.activeRepoFileIdx = 0;
+
+      const modal = document.getElementById('project-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+
+      renderProjectModalContent();
+      refreshIcons();
+    }
+
+    function closeProjectModal() {
+      const modal = document.getElementById('project-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+      state.activeModalProjectId = null;
+    }
+
+    function handleModalBackdropClick(e) {
+      if (e.target.id === 'project-modal') {
+        closeProjectModal();
+      }
+    }
+
+    function switchModalTab(tabId) {
+      state.activeModalTab = tabId;
+      renderProjectModalContent();
+      refreshIcons();
+    }
+
+    function selectModalArchStep(idx) {
+      state.activeArchStepIdx = idx;
+      renderProjectModalContent();
+      refreshIcons();
+    }
+
+    function selectModalRepoFile(idx) {
+      state.activeRepoFileIdx = idx;
+      renderProjectModalContent();
+      refreshIcons();
+    }
+
+    function renderProjectModalContent() {
+      const proj = PROJECTS_DATA.find((p) => p.id === state.activeModalProjectId);
+      if (!proj) return;
+
+      const t = APP_DATA[state.lang].modal;
+      const pLabels = APP_DATA[state.lang].projects;
+
+      // Update Header
+      document.getElementById('modal-badge').textContent = proj.shortLabel;
+      document.getElementById('modal-category').textContent = proj.category[state.lang];
+      document.getElementById('modal-title').textContent = proj.title[state.lang];
+
+      // Update Tabs Styling
+      ['arch', 'repo', 'guarantees'].forEach((tab) => {
+        const btn = document.getElementById(`modal-tab-${tab}`);
+        if (!btn) return;
+        if (state.activeModalTab === tab) {
+          btn.className = 'inline-flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all sm:text-sm bg-cyanx text-navy-950 shadow-glowCyan';
+        } else {
+          btn.className = 'inline-flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold transition-all sm:text-sm bg-navy-850 text-slate-300 border border-slate-700/80 hover:border-cyanx/50 hover:text-cyanx';
+        }
+      });
+
+      // Update External Footer Links
+      const extLinks = document.getElementById('modal-external-links');
+      extLinks.innerHTML = `
+        <a href="${proj.githubUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-xl border border-slate-700 bg-navy-850 px-3.5 py-2 text-xs font-semibold text-slate-200 transition-colors hover:border-cyanx hover:text-cyanx">
+          <i data-lucide="github" class="h-4 w-4"></i>
+          <span>${pLabels.viewRepo}</span>
+        </a>
+        ${proj.docsUrl ? `
+          <a href="${proj.docsUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-xl border border-slate-700 bg-navy-850 px-3.5 py-2 text-xs font-semibold text-slate-200 transition-colors hover:border-violetx hover:text-violet-300">
+            <i data-lucide="book-open" class="h-4 w-4"></i>
+            <span>${pLabels.viewDocs}</span>
+          </a>
+        ` : ''}
+      `;
+
+      // Wire "Request Similar Architecture" CTA
+      const hireBtn = document.getElementById('modal-hire-similar-btn');
+      hireBtn.onclick = () => {
+        closeProjectModal();
+        selectServiceAndScroll(proj.serviceId);
+      };
+
+      // Render Active Tab Body
+      const body = document.getElementById('modal-body');
+
+      if (state.activeModalTab === 'arch') {
+        const activeStep = proj.architectureSteps[state.activeArchStepIdx] || proj.architectureSteps[0];
+        body.innerHTML = `
+          <!-- Business Problem vs Engineering Solution -->
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div class="rounded-2xl border border-rose-500/25 bg-rose-500/5 p-4 sm:p-5">
+              <div class="flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider text-rose-300">
+                <i data-lucide="alert-triangle" class="h-4 w-4"></i>
+                <span>${t.problemTitle}</span>
+              </div>
+              <p class="mt-2.5 text-sm leading-relaxed text-slate-300">${proj.businessProblem[state.lang]}</p>
+            </div>
+            <div class="rounded-2xl border border-emeraldx/30 bg-emeraldx/5 p-4 sm:p-5">
+              <div class="flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider text-emerald-300">
+                <i data-lucide="cpu" class="h-4 w-4"></i>
+                <span>${t.solutionTitle}</span>
+              </div>
+              <p class="mt-2.5 text-sm leading-relaxed text-slate-200">${proj.engineeringSolution[state.lang]}</p>
+            </div>
+          </div>
+
+          <!-- Interactive Clickable Step-by-Step Pipeline -->
+          <div class="mt-6 rounded-2xl border border-slate-800 bg-navy-950/90 p-5">
+            <div class="flex items-center justify-between gap-2">
+              <h4 class="font-mono text-xs font-semibold uppercase tracking-wider text-cyanx">${t.pipelineTitle}</h4>
+              <span class="font-mono text-[11px] text-slate-500">${state.activeArchStepIdx + 1} / ${proj.architectureSteps.length}</span>
+            </div>
+
+            <div class="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-${proj.architectureSteps.length}">
+              ${proj.architectureSteps.map((s, idx) => {
+                const isSelected = idx === state.activeArchStepIdx;
+                return `
+                  <button type="button" onclick="selectModalArchStep(${idx})" class="flex flex-col items-start rounded-xl border p-3 text-left transition-all ${
+                    isSelected
+                      ? 'border-cyanx bg-cyanx/15 shadow-glowCyan'
+                      : 'border-slate-800 bg-navy-900/90 hover:border-slate-600'
+                  }">
+                    <span class="font-heading text-xs font-bold ${isSelected ? 'text-cyan-200' : 'text-slate-200'}">${s.step[state.lang]}</span>
+                    <span class="mt-1 truncate w-full font-mono text-[10px] ${isSelected ? 'text-emerald-300' : 'text-slate-400'}">${s.tag}</span>
+                  </button>
+                `;
+              }).join('')}
+            </div>
+
+            <!-- Selected Step Inspection Panel -->
+            <div class="mt-4 rounded-xl border border-cyanx/30 bg-navy-900 p-4">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="font-mono text-[11px] uppercase tracking-wider text-emeraldx">● ${t.activeStepLabel}: ${activeStep.step[state.lang]}</span>
+                <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] text-cyan-300">${activeStep.tag}</span>
+              </div>
+              <p class="mt-2 text-sm leading-relaxed text-slate-200">${activeStep.detail[state.lang]}</p>
+            </div>
+          </div>
+        `;
+      } else if (state.activeModalTab === 'repo') {
+        // VS Code-Style Interactive Repository Explorer
+        const activeFile = proj.repoTree[state.activeRepoFileIdx] || proj.repoTree[0];
+        body.innerHTML = `
+          <div class="overflow-hidden rounded-2xl border border-slate-700/90 bg-navy-950">
+            <!-- VS Code Header Bar -->
+            <div class="flex items-center justify-between border-b border-slate-800 bg-navy-900 px-4 py-2.5">
+              <div class="flex items-center gap-2 font-mono text-xs text-slate-300">
+                <i data-lucide="folder-git-2" class="h-4 w-4 text-cyanx"></i>
+                <span class="font-semibold">${proj.githubUrl.split('/').pop()}</span>
+              </div>
+              <span class="hidden sm:inline font-mono text-[11px] text-slate-400">${t.repoHint}</span>
+            </div>
+
+            <!-- Split Explorer & Live Code Inspection Panel -->
+            <div class="grid grid-cols-1 lg:grid-cols-12">
+              <!-- Left File Tree -->
+              <div class="border-b border-slate-800 bg-navy-950/95 p-3 lg:col-span-5 lg:border-b-0 lg:border-r">
+                <div class="space-y-1">
+                  ${proj.repoTree.map((item, idx) => {
+                    const isSelected = idx === state.activeRepoFileIdx;
+                    const iconName = item.type === 'folder' ? 'folder' : (item.path.endsWith('.yaml') ? 'file-sliders' : 'file-code-2');
+                    return `
+                      <button type="button" onclick="selectModalRepoFile(${idx})" class="flex w-full items-center justify-between gap-2 rounded-lg px-3 py-2 text-left font-mono text-xs transition-all ${
+                        isSelected
+                          ? 'bg-cyanx/15 text-cyan-200 border border-cyanx/40'
+                          : 'text-slate-300 hover:bg-navy-900 border border-transparent'
+                      }">
+                        <span class="flex items-center gap-2 min-w-0">
+                          <i data-lucide="${iconName}" class="h-3.5 w-3.5 shrink-0 ${isSelected ? 'text-cyanx' : 'text-slate-400'}"></i>
+                          <span class="truncate">${item.path}</span>
+                        </span>
+                        <span class="shrink-0 rounded bg-slate-800/90 px-1.5 py-0.5 text-[10px] text-slate-400">${item.badge}</span>
+                      </button>
+                    `;
+                  }).join('')}
+                </div>
+              </div>
+
+              <!-- Right Code & Role Explanation Panel -->
+              <div class="flex flex-col bg-[#080D1A] p-4 sm:p-5 lg:col-span-7">
+                <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+                  <span class="font-mono text-xs font-semibold text-cyanx">${activeFile.path}</span>
+                  <span class="rounded-full bg-emeraldx/15 border border-emeraldx/30 px-2.5 py-0.5 font-mono text-[10px] text-emerald-300">${activeFile.badge}</span>
+                </div>
+                <p class="mt-3 text-sm leading-relaxed text-slate-200">${activeFile.role[state.lang]}</p>
+                <div class="mt-4 flex-1 overflow-x-auto rounded-xl border border-slate-800 bg-navy-950 p-4">
+                  <pre class="font-mono text-xs leading-relaxed text-emerald-300/95"><code>${escapeHtml(activeFile.snippet)}</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        // Tab 3: Production Guarantees & Tech Stack
+        body.innerHTML = `
+          <div class="rounded-2xl border border-slate-800 bg-navy-950/80 p-5 sm:p-6">
+            <h4 class="font-heading text-base font-bold text-slate-100">${t.guaranteesTitle}</h4>
+            <ul class="mt-4 space-y-3">
+              ${proj.highlights[state.lang].map((h) => `
+                <li class="flex items-start gap-3 rounded-xl border border-slate-800/80 bg-navy-900/70 p-3.5 text-sm leading-relaxed text-slate-200">
+                  <i data-lucide="shield-check" class="mt-0.5 h-5 w-5 shrink-0 text-emeraldx"></i>
+                  <span>${h}</span>
+                </li>
+              `).join('')}
+            </ul>
+
+            <h4 class="mt-6 font-heading text-base font-bold text-slate-100">${t.stackTitle}</h4>
+            <div class="mt-3 flex flex-wrap gap-2">
+              ${proj.techStack.map((tech) => `
+                <span class="rounded-xl border border-cyanx/30 bg-cyanx/10 px-3 py-1.5 font-mono text-xs font-medium text-cyan-200">${tech}</span>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    /* =====================================================================
+       CONTACT & QUICK PROJECT BRIEF BUILDER
+       ===================================================================== */
+    function renderBriefBuilderOptions() {
+      const services = APP_DATA[state.lang].services.items;
+      const briefDict = APP_DATA[state.lang].brief;
+
+      // Render Package Radio Pills
+      const pkgContainer = document.getElementById('brief-package-options');
+      if (pkgContainer) {
+        pkgContainer.innerHTML = services.map((s) => {
+          const isSelected = state.selectedBriefServiceId === s.id;
+          return `
+            <button type="button" onclick="selectBriefPackage('${s.id}')" class="flex flex-col items-start rounded-xl border p-3 text-left transition-all ${
+              isSelected
+                ? 'border-cyanx bg-cyanx/15 text-slate-50 shadow-glowCyan'
+                : 'border-slate-700/80 bg-navy-950/80 text-slate-300 hover:border-slate-500'
+            }">
+              <span class="font-mono text-[10px] uppercase tracking-wider ${isSelected ? 'text-cyanx' : 'text-slate-400'}">${s.badge}</span>
+              <span class="mt-1 text-xs font-semibold leading-snug">${s.title}</span>
+            </button>
+          `;
+        }).join('');
+      }
+
+      // Render Timeline Options (preserve selected index)
+      const timelineSelect = document.getElementById('brief-timeline');
+      if (timelineSelect) {
+        const prevIdx = timelineSelect.selectedIndex >= 0 ? timelineSelect.selectedIndex : 1;
+        timelineSelect.innerHTML = briefDict.timelines.map((tl, idx) => `<option value="${idx}">${tl}</option>`).join('');
+        timelineSelect.selectedIndex = Math.min(prevIdx, briefDict.timelines.length - 1);
+      }
+
+      updateBriefPreview();
+    }
+
+    function selectBriefPackage(serviceId) {
+      state.selectedBriefServiceId = serviceId;
+      renderBriefBuilderOptions();
+    }
+
+    function selectServiceAndScroll(serviceId) {
+      state.selectedBriefServiceId = serviceId;
+      renderBriefBuilderOptions();
+      const contactSec = document.getElementById('contact');
+      if (contactSec) {
+        contactSec.scrollIntoView({ behavior: 'smooth' });
+      }
+      showToast(APP_DATA[state.lang].toasts.pkgSelected, 'emerald');
+    }
+
+    function updateBriefPreview() {
+      const briefDict = APP_DATA[state.lang].brief;
+      const services = APP_DATA[state.lang].services.items;
+      const pkg = services.find((s) => s.id === state.selectedBriefServiceId) || services[1];
+
+      const nameVal = (document.getElementById('brief-name')?.value || '').trim() || briefDict.defaultName;
+      const timelineIdx = document.getElementById('brief-timeline')?.selectedIndex || 0;
+      const timelineVal = briefDict.timelines[timelineIdx] || briefDict.timelines[0];
+      const goalVal = (document.getElementById('brief-goal')?.value || '').trim() || briefDict.defaultGoal;
+
+      let text = '';
+      let subject = '';
+
+      if (state.lang === 'es') {
+        subject = `Consulta Freelance ML/MLOps — ${pkg.title}`;
+        text = `Hola Juan Manuel,\n\nSoy ${nameVal}. Estoy interesado en tu paquete:\n• Servicio: ${pkg.title}\n• Horizonte estimado: ${timelineVal}\n• Objetivo / Reto técnico: ${goalVal}\n\n¿Podemos coordinar una breve llamada técnica para revisar alcance y entregables?`;
+      } else {
+        subject = `Freelance ML/MLOps Inquiry — ${pkg.title}`;
+        text = `Hi Juan Manuel,\n\nI'm ${nameVal}. I'm interested in working together on:\n• Service Package: ${pkg.title}\n• Target Timeline: ${timelineVal}\n• Project Goal / Challenge: ${goalVal}\n\nCould we schedule a quick technical call to align on scope and deliverables?`;
+      }
+
+      const previewEl = document.getElementById('brief-preview-text');
+      if (previewEl) previewEl.textContent = text;
+
+      const mailtoBtn = document.getElementById('brief-mailto-btn');
+      if (mailtoBtn) {
+        mailtoBtn.href = `mailto:juanmanuel.diaz@utp.edu.co?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
+      }
+    }
+
+    /* =====================================================================
+       UTILITIES: SAFE IFRAME CLIPBOARD COPY, TOASTS, PRINT, LANGUAGE SWITCH
+       ===================================================================== */
+
+    /**
+     * Copies text reliably inside sandboxed iframes using document.execCommand('copy')
+     */
+    function copyTextToClipboard(text, toastMessage) {
+      try {
+        const tempArea = document.createElement('textarea');
+        tempArea.value = text;
+        tempArea.setAttribute('readonly', '');
+        tempArea.style.position = 'fixed';
+        tempArea.style.top = '-9999px';
+        tempArea.style.left = '-9999px';
+        document.body.appendChild(tempArea);
+        tempArea.select();
+        tempArea.setSelectionRange(0, tempArea.value.length);
+        const copied = document.execCommand('copy');
+        document.body.removeChild(tempArea);
+
+        if (copied) {
+          showToast(toastMessage, 'cyan');
+        } else if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => showToast(toastMessage, 'cyan'));
+        }
+      } catch (err) {
+        console.error('Clipboard copy failed:', err);
+        showToast(toastMessage, 'cyan');
+      }
+    }
+
+    function copyEmail() {
+      copyTextToClipboard('juanmanuel.diaz@utp.edu.co', APP_DATA[state.lang].toasts.emailCopied);
+    }
+
+    function copyBrief() {
+      const briefText = document.getElementById('brief-preview-text')?.textContent || '';
+      copyTextToClipboard(briefText, APP_DATA[state.lang].toasts.briefCopied);
+    }
+
+    function exportPortfolioPDF() {
+      showToast(APP_DATA[state.lang].toasts.printReady, 'cyan');
+      setTimeout(() => {
+        try {
+          window.print();
+        } catch (err) {
+          console.error('Print failed:', err);
+        }
+      }, 300);
+    }
+
+    function showToast(message, variant = 'cyan') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+
+      const borderAccent = variant === 'emerald' ? 'border-emeraldx/60 text-emerald-200' : 'border-cyanx/60 text-cyan-100';
+      const iconColor = variant === 'emerald' ? 'text-emeraldx' : 'text-cyanx';
+
+      const toast = document.createElement('div');
+      toast.className = `toast-animate pointer-events-auto flex items-center gap-2.5 rounded-xl border bg-navy-900/95 px-4 py-3 text-xs font-medium shadow-2xl backdrop-blur-md sm:text-sm ${borderAccent}`;
+      toast.innerHTML = `
+        <i data-lucide="check-circle-2" class="h-4 w-4 shrink-0 ${iconColor}"></i>
+        <span>${escapeHtml(message)}</span>
+      `;
+      container.appendChild(toast);
+      refreshIcons();
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(8px)';
+        toast.style.transition = 'all 0.25s ease';
+        setTimeout(() => toast.remove(), 260);
+      }, 3200);
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      if (menu) menu.classList.toggle('hidden');
+    }
+
+    function setLanguage(lang) {
+      if (lang !== 'es' && lang !== 'en') return;
+      state.lang = lang;
+      renderAll();
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function refreshIcons() {
+      try {
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+          window.lucide.createIcons();
+        }
+      } catch (err) {
+        console.error('Lucide icon render error:', err);
+      }
+    }
+
+    /**
+     * Master Render Orchestrator
+     */
+    function renderAll() {
+      try {
+        applyStaticTranslations();
+        renderHeroStageInspector();
+        renderMetricsStrip();
+        renderFilterBar();
+        renderProjectsGrid();
+        renderServicesGrid();
+        renderSkillsGrid();
+        renderCredentialsGrid();
+        renderBriefBuilderOptions();
+
+        if (state.activeModalProjectId) {
+          renderProjectModalContent();
+        }
+        refreshIcons();
+      } catch (err) {
+        console.error('Portfolio render error:', err);
+      }
+    }
+
+    // Keyboard Support (Escape closes modal)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && state.activeModalProjectId) {
+        closeProjectModal();
+      }
+    });
+
+    // Initialize Application on DOMContentLoaded
+    window.addEventListener('DOMContentLoaded', () => {
+      renderAll();
+    });
+  </script>
+</body>
+</html>
